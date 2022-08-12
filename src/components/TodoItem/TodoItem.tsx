@@ -1,5 +1,5 @@
 
-const TodoItem = ({ data, removeItem }: ItemProps) => {
+const TodoItem = ({ data, removeItem, showItem }: ItemProps) => {
   const {
     key,
     name,
@@ -9,6 +9,7 @@ const TodoItem = ({ data, removeItem }: ItemProps) => {
   return (
     <li>
       {`${name} ${description} ${createdDate}`} 
+      <button onClick={() => showItem(key)}>S</button>
       <button onClick={() => removeItem(key)}>X</button>
     </li>
   )
