@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import TodoItem from "../TodoItem/TodoItem";
 
-const TodoList = ({ data, removeItem, showItem }: ListProps) => {
+const TodoList = ({ data }: ListProps) => {
   const [list, setList] = useState<Data[] | null>([]);
 
   useEffect(() => {
-    setList(data);
+    if (data) {
+      setList(data);
+    }
   }, [data]);
 
   return (
@@ -14,7 +16,7 @@ const TodoList = ({ data, removeItem, showItem }: ListProps) => {
       <ul>
         {
           list?.map((element) => {
-            return <TodoItem key={element.key} data={element} removeItem={removeItem} showItem={showItem} />;
+            return <TodoItem key={element.key} data={element} />;
           })
         }
       </ul>

@@ -1,5 +1,7 @@
+import { useGlobalContext } from "../../context";
 
-const TodoItem = ({ data, removeItem, showItem }: ItemProps) => {
+const TodoItem = ({ data }: ItemProps) => {
+  const state = useGlobalContext();
   const {
     key,
     name,
@@ -9,8 +11,8 @@ const TodoItem = ({ data, removeItem, showItem }: ItemProps) => {
   return (
     <li>
       {`${name} ${description} ${createdDate}`} 
-      <button onClick={() => showItem(key)}>S</button>
-      <button onClick={() => removeItem(key)}>X</button>
+      <button onClick={() => console.log('clicked s')}>S</button>
+      <button onClick={() => console.log('clicked x')}>X</button>
     </li>
   )
 }

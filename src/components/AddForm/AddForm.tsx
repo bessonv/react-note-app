@@ -1,4 +1,4 @@
-const AddForm = ({ saveForm }: FormProps) => {
+const AddForm = ({ }: FormProps) => {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -9,7 +9,7 @@ const AddForm = ({ saveForm }: FormProps) => {
     const name = target.todoName.value;
     const description = target.todoDescription.value;
 
-    saveForm(name, description);
+    // saveForm(name, description);
   }
 
   return (

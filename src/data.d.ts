@@ -6,15 +6,11 @@ type Data = {
 } 
 
 type ListProps = {
-  data: Data[],
-  removeItem: (key: number) => void
-  showItem: (key: number) => void
+  data?: Data[]
 }
 
 type ItemProps = {
-  data: Data
-  removeItem: (key: number) => void
-  showItem: (key: number) => void
+  data: Data,
   isShown?: boolean
 }
 
@@ -25,9 +21,46 @@ type ModalProps = {
 }
 
 type FormProps = {
-  saveForm: (name: string, description: string) => void
 }
 
 type DisplayProps = {
   data?: Data | null
+}
+
+interface AppContextInterface {
+  data: Data[],
+  isModalOpen: boolean,
+  addTodo(data: Data): void,
+  deleteTodo(id: number): void,
+  changeModalState(isOpen: boolean): void
+}
+
+interface TodoActionData {
+  type: TodoActionKind.ADD,
+  payload: Data
+}
+
+interface TodoActionId {
+  type: TodoActionKind.DELETE,
+  payload: number
+}
+
+interface TodoActionModal {
+  type: TodoActionKind.MODAL,
+  payload: boolean
+}
+
+enum TodoActionKind {
+  ADD = 'ADD',
+  DELETE = 'DELETE',
+  MODAL = 'MODAL'
+}
+
+type ProviderProps = {
+  children?: React.ReactNode
+}
+
+type TodoState = {
+  data: Data[],
+  isModalOpen: boolean
 }
