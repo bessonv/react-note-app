@@ -8,11 +8,17 @@ const TodoItem = ({ data }: ItemProps) => {
     description,
     createdDate
    } = data;
+  const handleShow = () => {
+    state?.showTodo(key);
+  }
+  const handleDelete = () => {
+    state?.deleteTodo(key);
+  }
   return (
     <li>
-      {`${name} ${description} ${createdDate}`} 
-      <button onClick={() => console.log('clicked s')}>S</button>
-      <button onClick={() => console.log('clicked x')}>X</button>
+      {`${key} ${name} ${description} ${createdDate}`} 
+      <button onClick={handleShow}>S</button>
+      <button onClick={handleDelete}>X</button>
     </li>
   )
 }

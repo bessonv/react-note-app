@@ -3,6 +3,16 @@ import { TodoActionKind } from './enums';
 function reducer(state: TodoState, action: TodoActionData | TodoActionModal | TodoActionId): TodoState {
   const { type, payload } = action;
 
+  if (type ===  TodoActionKind.GET) {
+    const currentTodoItem = state.data.find(el => el.key === payload);
+    if (currentTodoItem) // TODO: show error
+      return { ...state, currentTodoItem }
+  }
+
+  if (type === TodoActionKind.CLEAR) {
+    return { ...state, currentTodoItem: null }
+  }
+
   if (type === TodoActionKind.ADD) {
     const newTodo: Data = {
       key: state.data[state.data.length - 1].key + 1,
@@ -10,8 +20,7 @@ function reducer(state: TodoState, action: TodoActionData | TodoActionModal | To
       description: payload.description,
       createdDate: new Date()
     }
-    const newData = state.data;
-    newData.push(newTodo);
+    const newData = [...state.data, newTodo];
     return { ...state, data: newData };
   }
 

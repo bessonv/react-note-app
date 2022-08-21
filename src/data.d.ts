@@ -15,45 +15,53 @@ type ItemProps = {
 }
 
 type ModalProps = {
-  closeModal: () => void,
   children?: React.ReactNode
-  // children?: JSX.Element
 }
 
 type FormProps = {
 }
 
 type DisplayProps = {
-  data?: Data | null
+  data?: Data
 }
 
 interface AppContextInterface {
   data: Data[],
+  currentTodoItem: Data | null,
   isModalOpen: boolean,
-  addTodo(data: Data): void,
+  showTodo(id: number): void,
+  clearCurrent(): void,
+  addTodo(name: string, description: string): void,
   deleteTodo(id: number): void,
   changeModalState(isOpen: boolean): void
 }
 
+type AddObject = {
+  name: string,
+  description: string
+}
+
 interface TodoActionData {
   type: TodoActionKind.ADD,
-  payload: Data
+  payload: AddObject
 }
 
 interface TodoActionId {
-  type: TodoActionKind.DELETE,
+  type: TodoActionKind.DELETE | TodoActionKind.GET,
   payload: number
 }
 
 interface TodoActionModal {
-  type: TodoActionKind.MODAL,
+  type: TodoActionKind.MODAL | TodoActionKind.CLEAR,
   payload: boolean
 }
 
 enum TodoActionKind {
   ADD = 'ADD',
+  GET = 'GET',
   DELETE = 'DELETE',
-  MODAL = 'MODAL'
+  MODAL = 'MODAL',
+  CLEAR = 'CLEAR'
 }
 
 type ProviderProps = {
@@ -62,5 +70,6 @@ type ProviderProps = {
 
 type TodoState = {
   data: Data[],
+  currentTodoItem: Data | null,
   isModalOpen: boolean
 }

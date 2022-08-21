@@ -1,5 +1,7 @@
 export enum TodoActionKind {
   ADD = 'ADD',
+  GET = 'GET',
   DELETE = 'DELETE',
-  MODAL = 'MODAL'
+  MODAL = 'MODAL',
+  CLEAR = 'CLEAR'
 }

@@ -1,9 +1,14 @@
+import { useGlobalContext } from "../../context";
 
-const Modal = ({ closeModal, children }: ModalProps) => {
+const Modal = ({ children }: ModalProps) => {
+  const state = useGlobalContext();
+  const handleClose = () => {
+    state?.changeModalState(false);
+  }
   return (
     <div className="modal-container">
       <p>This is modal</p>
-      <button onClick={() => closeModal()}>Close modal</button>
+      <button onClick={handleClose}>Close modal</button>
       {children}
     </div>
   )

@@ -10,6 +10,7 @@ import { TodoActionKind } from './enums';
 
 const initialState: TodoState = {
   data: mockData as Data[],
+  currentTodoItem: null,
   isModalOpen: false
 }
 
@@ -22,8 +23,18 @@ const AppProvider = ({ children }: ProviderProps) => {
     // getData();
   }, [])
 
-  const addTodo = (data: Data) => {
-    dispatch({ type: TodoActionKind.ADD, payload: data });
+  const showTodo = (id: number) => {
+    dispatch({ type: TodoActionKind.GET, payload: id });
+    dispatch({ type: TodoActionKind.MODAL, payload: true });
+  }
+
+  const clearCurrent = () => {
+    dispatch({ type: TodoActionKind.CLEAR, payload: true });
+  }
+
+  const addTodo = (name: string, description: string) => {
+    dispatch({ type: TodoActionKind.ADD, payload: {name, description} });
+    dispatch({ type: TodoActionKind.MODAL, payload: false });
   }
 
   const deleteTodo = (id: number) => {
@@ -40,7 +51,7 @@ const AppProvider = ({ children }: ProviderProps) => {
   // }
 
   return (
-      <AppContext.Provider value= {{...state, addTodo, deleteTodo, changeModalState }} >
+      <AppContext.Provider value= {{...state, showTodo, clearCurrent, addTodo, deleteTodo, changeModalState }} >
         {children}
       </AppContext.Provider>
   )

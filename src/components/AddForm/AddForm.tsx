@@ -1,4 +1,7 @@
-const AddForm = ({ }: FormProps) => {
+import { useGlobalContext } from "../../context";
+
+const AddForm = () => {
+  const state = useGlobalContext()
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -9,7 +12,7 @@ const AddForm = ({ }: FormProps) => {
     const name = target.todoName.value;
     const description = target.todoDescription.value;
 
-    // saveForm(name, description);
+    state?.addTodo(name, description);
   }
 
   return (
