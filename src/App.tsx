@@ -7,21 +7,21 @@ import Display from './components/Display/Display';
 import { useGlobalContext  } from './context';
 
 function App() {
-  const state  = useGlobalContext();
+  const state  = useGlobalContext() as AppContextInterface;
 
   const handleModal = () => {
-    state?.clearCurrent();
-    state?.changeModalState(!state.isModalOpen)
+    state.clearCurrent();
+    state.changeModalState(!state.isModalOpen)
   }
   
   return (
     <>
       <button onClick={handleModal}>Add new ToDo</button>
-      <TodoList data={state?.data} />
+      <TodoList data={state.data} />
       {
-        state?.isModalOpen && 
+        state.isModalOpen && 
         <Modal >
-          { state.currentTodoItem ? <Display data={state?.currentTodoItem} /> : <AddForm /> }
+          { state.currentTodoItem ? <Display data={state.currentTodoItem} /> : <AddForm /> }
         </Modal>
       }
     </>

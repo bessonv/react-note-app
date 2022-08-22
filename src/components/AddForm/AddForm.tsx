@@ -1,7 +1,7 @@
 import { useGlobalContext } from "../../context";
 
 const AddForm = () => {
-  const state = useGlobalContext()
+  const state = useGlobalContext() as AppContextInterface;
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -12,7 +12,11 @@ const AddForm = () => {
     const name = target.todoName.value;
     const description = target.todoDescription.value;
 
-    state?.addTodo(name, description);
+    state.addTodo(name, description);
+  }
+
+  const handleCancel = () => {
+    state.changeModalState(false);
   }
 
   return (
@@ -27,6 +31,7 @@ const AddForm = () => {
       </label>
       <div>
         <input type="submit" value="save" />
+        <input type="button" value="cancel" onClick={handleCancel} />
       </div>
     </form>
   )

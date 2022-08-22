@@ -1,9 +1,9 @@
 import { useGlobalContext } from "../../context";
 
 const Modal = ({ children }: ModalProps) => {
-  const state = useGlobalContext();
+  const state = useGlobalContext() as AppContextInterface;
   const handleClose = () => {
-    state?.changeModalState(false);
+    state.changeModalState(false);
   }
   return (
     <div className="modal-container">

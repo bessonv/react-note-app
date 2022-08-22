@@ -1,7 +1,7 @@
 import { useGlobalContext } from "../../context";
 
 const TodoItem = ({ data }: ItemProps) => {
-  const state = useGlobalContext();
+  const state = useGlobalContext() as AppContextInterface;
   const {
     key,
     name,
@@ -9,10 +9,10 @@ const TodoItem = ({ data }: ItemProps) => {
     createdDate
    } = data;
   const handleShow = () => {
-    state?.showTodo(key);
+    state.showTodo(key);
   }
   const handleDelete = () => {
-    state?.deleteTodo(key);
+    state.deleteTodo(key);
   }
   return (
     <li>
