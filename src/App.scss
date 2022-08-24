@@ -1,0 +1,36 @@
+html, body {
+  background: #efefef;
+}
+
+main {
+  padding: 0 40px;
+  margin: 0 auto;
+  margin-top: 40px;
+
+  .control {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+
+  .button-medium {
+    color: #333;
+    padding: 8px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: #efefef;
+      border-color: #7a7a7a;
+      cursor: pointer;
+    }
+
+    &_white {
+      background-color: white;
+    }
+  }
+
+}

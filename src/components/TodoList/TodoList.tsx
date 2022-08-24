@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./TodoList.scss";
 import TodoItem from "../TodoItem/TodoItem";
 
 const TodoList = ({ data }: ListProps) => {
@@ -13,7 +14,7 @@ const TodoList = ({ data }: ListProps) => {
   return (
     <>
       <h2>The List</h2>
-      <ul>
+      <ul className="todo-list">
         {
           list?.map((element) => {
             return <TodoItem key={element.key} data={element} />;

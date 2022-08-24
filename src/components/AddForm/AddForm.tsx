@@ -1,3 +1,4 @@
+import "./AddForm.scss";
 import { useGlobalContext } from "../../context";
 
 const AddForm = () => {
@@ -20,18 +21,18 @@ const AddForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="add-form" >
       <label>
-        Name:
+        <span>Name:</span>
         <input type="text" name="todoName"/>
       </label>
       <label>
-        Description:
-        <input type="text" name="todoDescription"/>
+        <span>Description:</span>
+        <textarea rows={6} name="todoDescription"/>
       </label>
-      <div>
-        <input type="submit" value="save" />
-        <input type="button" value="cancel" onClick={handleCancel} />
+      <div className="add-form__buttons">
+        <input type="submit" value="save" className="add-form__button button-medium"/>
+        <input type="button" value="cancel" onClick={handleCancel} className="add-form__button button-medium"/>
       </div>
     </form>
   )

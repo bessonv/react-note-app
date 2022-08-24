@@ -3,11 +3,6 @@ import mockData from './mockData';
 import reducer from './reducer';
 import { TodoActionKind } from './enums';
 
-// const initialState: AppContextInterface = {
-//   data: mockData as Data[],
-//   isModalOpen: false
-// }
-
 const initialState: TodoState = {
   data: mockData as Data[],
   currentTodoItem: null,
