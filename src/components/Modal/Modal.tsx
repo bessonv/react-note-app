@@ -13,9 +13,8 @@ const Modal = ({ children }: ModalProps) => {
     <div className="modal" onClick={handleClose}>
       <div className="modal__content">
         <div className="modal__close">
-          <div className="modal__close_button" onClick={handleClose}>X</div>
+          <div className="modal__close_button button-cross" onClick={handleClose}>X</div>
         </div>
-        <p>This is modal</p>
         {/* <button onClick={handleClose}>Close modal</button> */}
         {children}
       </div>

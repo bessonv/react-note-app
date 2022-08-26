@@ -12,16 +12,13 @@ const TodoList = ({ data }: ListProps) => {
   }, [data]);
 
   return (
-    <>
-      <h2>The List</h2>
-      <ul className="todo-list">
-        {
-          list?.map((element) => {
-            return <TodoItem key={element.key} data={element} />;
-          })
-        }
-      </ul>
-    </>
+    <ul className="todo-list">
+      {
+        list?.map((element) => {
+          return <TodoItem key={element.key} data={element} />;
+        })
+      }
+    </ul>
   )
 }
 

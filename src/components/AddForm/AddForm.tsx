@@ -21,18 +21,18 @@ const AddForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="add-form" >
-      <label>
+    <form onSubmit={handleSubmit} className="todo-form" >
+      <label className="todo-form__name">
         <span>Name:</span>
-        <input type="text" name="todoName"/>
+        <input type="text" name="todoName" className="todo-input"/>
       </label>
-      <label>
+      <label className="todo-form__description">
         <span>Description:</span>
-        <textarea rows={6} name="todoDescription"/>
+        <textarea rows={6} name="todoDescription" className="todo-textarea"/>
       </label>
-      <div className="add-form__buttons">
-        <input type="submit" value="save" className="add-form__button button-medium"/>
-        <input type="button" value="cancel" onClick={handleCancel} className="add-form__button button-medium"/>
+      <div className="todo-form__buttons">
+        <input type="submit" value="save" className="todo-form__button button-medium"/>
+        <input type="button" value="cancel" onClick={handleCancel} className="todo-form__button button-medium"/>
       </div>
     </form>
   )

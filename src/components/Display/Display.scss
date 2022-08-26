@@ -1,0 +1,12 @@
+.todo-display {
+  &__name {
+    margin-top: 0;
+  }
+
+  &__date {
+    font-size: .75em;
+    margin-top: 20px;
+    margin-right: 10px;
+    text-align: right;
+  }
+}

@@ -15,15 +15,22 @@
   }
 
   &__close {
-    text-align: right;
     width: 400px;
     position: relative;
 
     &_button {
-      cursor: pointer;
+      text-align: center;
       width: 20px;
+      height: 20px;
+      padding: 5px;
+      border-radius: 50%;
       position: absolute;
       right: 0;
+
+      &:hover {
+        background: #5f636828;
+        cursor: pointer;
+      }
     }
   }
 }

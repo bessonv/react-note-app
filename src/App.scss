@@ -1,11 +1,25 @@
+$horizontal-padding: 40px;
+
 html, body {
-  background: #efefef;
+  background: #fff;
+  color: #202124;
+}
+
+header {
+  padding: 10px $horizontal-padding;
+  border-bottom: 1px solid #e0e0e0;
+
+  h2 {
+    margin: 0;
+    padding: 0;
+  }
+
 }
 
 main {
-  padding: 0 40px;
+  padding: 0 $horizontal-padding;
   margin: 0 auto;
-  margin-top: 40px;
+  margin-top: 20px;
 
   .control {
     width: 100%;
@@ -13,24 +27,57 @@ main {
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+
+    &__search {
+      width: 30%;
+    }
   }
 
 
   .button-medium {
     color: #333;
+    background-color: white;
     padding: 8px;
-    border: 1px solid #eee;
+    border: 1px solid #e0e0e0;
     border-radius: 4px;
 
     &:hover {
-      background-color: #efefef;
-      border-color: #7a7a7a;
+      background-color: #3c404314;
       cursor: pointer;
     }
+  }
 
-    &_white {
-      background-color: white;
+  .button-cross {
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+    border-radius: 50%;
+
+    &:hover {
+      background: #5f636828;
+      cursor: pointer;
     }
+  }
+
+  @mixin input-style {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .todo-input {
+    @include input-style();
+  }
+
+  .todo-textarea {
+    @include input-style();
+    resize: vertical;
   }
 
 }

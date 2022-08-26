@@ -17,19 +17,24 @@ function App() {
   }
   
   return (
-    <main>
-      <div className="control">
-        <input type="text" className="search" placeholder="search"/>
-        <button onClick={handleModal} className="control__button button-medium button-medium_white">Add new ToDo</button>
-      </div>
-      <TodoList data={state.data} />
-      {
-        state.isModalOpen && 
-        <Modal >
-          { state.currentTodoItem ? <Display data={state.currentTodoItem} /> : <AddForm /> }
-        </Modal>
-      }
-    </main>
+    <>
+      <header>
+        <h2>To-Do List</h2>
+      </header>
+      <main>
+        <div className="control">
+          <input type="text" className="control__search todo-input" placeholder="search"/>
+          <button onClick={handleModal} className="control__button button-medium">Add new ToDo</button>
+        </div>
+        <TodoList data={state.data} />
+        {
+          state.isModalOpen && 
+          <Modal >
+            { state.currentTodoItem ? <Display data={state.currentTodoItem} /> : <AddForm /> }
+          </Modal>
+        }
+      </main>
+    </>
   );
 }
 

@@ -1,4 +1,8 @@
-.add-form {
+.todo-form {
+  &__name {
+    margin-top: 20px;
+  }
+  
   label {
     margin-bottom: 20px;
     display: flex;
