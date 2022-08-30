@@ -2,6 +2,11 @@ import "./TodoItem.scss";
 import { MouseEvent } from 'react';
 import { useGlobalContext } from "../../context";
 
+type ItemProps = {
+  data: Data,
+  isShown?: boolean
+}
+
 const TodoItem = ({ data }: ItemProps) => {
   const state = useGlobalContext() as AppContextInterface;
   const {
@@ -24,9 +29,6 @@ const TodoItem = ({ data }: ItemProps) => {
         <p className="todo-item__description">{description.length > 160 ? description.slice(0, 160) + '...' : description}</p>
         <span className="todo-item__date">{`${createdDate.getDate()}.${createdDate.getMonth()}.${createdDate.getFullYear()}`}</span>
       </div>
-      {/* {`${key} ${name} ${description} ${createdDate}`}  */}
-      {/* <button onClick={handleShow}>S</button>
-      <button onClick={handleDelete}>X</button> */}
     </li>
   )
 }

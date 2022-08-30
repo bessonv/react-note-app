@@ -1,7 +1,15 @@
 export enum TodoActionKind {
   ADD = 'ADD',
   GET = 'GET',
+  EDIT = 'EDIT',
   DELETE = 'DELETE',
-  MODAL = 'MODAL',
-  CLEAR = 'CLEAR'
+  OPEN_MODAL = 'OPEN_MODAL',
+  CLEAR = 'CLEAR',
+  CLOSE_MODAL = 'CLOSE_MODAL'
+}
+
+export enum TodoModalType {
+  SHOW = 'SHOW',
+  ADD = 'ADD',
+  EDIT = 'EDIT'
 }

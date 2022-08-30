@@ -2,11 +2,15 @@ import './Modal.scss';
 import { MouseEvent } from 'react';
 import { useGlobalContext } from "../../context";
 
+type ModalProps = {
+  children?: React.ReactNode
+}
+
 const Modal = ({ children }: ModalProps) => {
   const state = useGlobalContext() as AppContextInterface;
   const handleClose = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
-      state.changeModalState(false);
+      state.closeModal();
     }
   }
   return (

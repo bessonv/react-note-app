@@ -1,8 +1,15 @@
 import "./AddForm.scss";
 import { useGlobalContext } from "../../context";
+import { useState } from "react";
 
-const AddForm = () => {
+type FormProps = {
+  todo?: Data
+}
+
+const AddForm = ({ todo }: FormProps) => {
   const state = useGlobalContext() as AppContextInterface;
+  const [name, changeName] = useState(todo?.name || '');
+  const [description, changeDescr] = useState(todo?.description || '');
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -13,22 +20,36 @@ const AddForm = () => {
     const name = target.todoName.value;
     const description = target.todoDescription.value;
 
-    state.addTodo(name, description);
+    if (todo) {
+      state.editTodo(todo.key, name, description);
+    } else {
+      state.addTodo(name, description);
+    }
   }
 
   const handleCancel = () => {
-    state.changeModalState(false);
+    state.closeModal();
   }
 
   return (
     <form onSubmit={handleSubmit} className="todo-form" >
       <label className="todo-form__name">
         <span>Name:</span>
-        <input type="text" name="todoName" className="todo-input"/>
+        <input 
+          type="text" 
+          name="todoName" 
+          className="todo-input" 
+          value={name} 
+          onChange={(e) => changeName(e.target.value)}/>
       </label>
       <label className="todo-form__description">
         <span>Description:</span>
-        <textarea rows={6} name="todoDescription" className="todo-textarea"/>
+        <textarea 
+          rows={6} 
+          name="todoDescription" 
+          className="todo-textarea" 
+          value={description} 
+          onChange={(e) => changeDescr(e.target.value)}/>
       </label>
       <div className="todo-form__buttons">
         <input type="submit" value="save" className="todo-form__button button-medium"/>

@@ -3,40 +3,30 @@ type Data = {
   name: string,
   description: string,
   createdDate: Date
-} 
-
-type ListProps = {
-  data?: Data[]
-}
-
-type ItemProps = {
-  data: Data,
-  isShown?: boolean
-}
-
-type ModalProps = {
-  children?: React.ReactNode
-}
-
-type FormProps = {
-}
-
-type DisplayProps = {
-  data?: Data
 }
 
 interface AppContextInterface {
   data: Data[],
   currentTodoItem: Data | null,
   isModalOpen: boolean,
+  modalType: TodoModalType,
   showTodo(id: number): void,
+  showEditTodo(id: number): void,
+  showAddTodo(): void,
   clearCurrent(): void,
   addTodo(name: string, description: string): void,
+  editTodo(id: number, name: string, description: string): void,
   deleteTodo(id: number): void,
-  changeModalState(isOpen: boolean): void
+  closeModal(): void
 }
 
 type AddObject = {
+  name: string,
+  description: string
+}
+
+type EditObject = {
+  id: number,
   name: string,
   description: string
 }
@@ -52,24 +42,41 @@ interface TodoActionId {
 }
 
 interface TodoActionModal {
-  type: TodoActionKind.MODAL | TodoActionKind.CLEAR,
+  type: TodoActionKind.OPEN_MODAL | TodoActionKind.CLEAR,
   payload: boolean
 }
+
+interface TodoActionEdit {
+  type: TodoActionKind.EDIT,
+  payload: EditObject
+}
+
+interface TodoActionModalType {
+  type: TodoActionKind.CLOSE_MODAL,
+  payload: TodoModalType
+}
+
+type TodoAction = TodoActionData | TodoActionId | TodoActionModal | TodoActionEdit | TodoActionModalType;
 
 enum TodoActionKind {
   ADD = 'ADD',
   GET = 'GET',
+  EDIT = 'EDIT',
   DELETE = 'DELETE',
-  MODAL = 'MODAL',
-  CLEAR = 'CLEAR'
+  OPEN_MODAL = 'OPEN_MODAL',
+  CLEAR = 'CLEAR',
+  CLOSE_MODAL = 'CLOSE_MODAL'
 }
 
-type ProviderProps = {
-  children?: React.ReactNode
+enum TodoModalType {
+  SHOW = 'SHOW',
+  ADD = 'ADD',
+  EDIT = 'EDIT'
 }
 
 type TodoState = {
   data: Data[],
   currentTodoItem: Data | null,
-  isModalOpen: boolean
+  isModalOpen: boolean,
+  modalType: TodoModalType
 }

@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import "./TodoList.scss";
 import TodoItem from "../TodoItem/TodoItem";
 
+type ListProps = {
+  data?: Data[]
+}
+
 const TodoList = ({ data }: ListProps) => {
   const [list, setList] = useState<Data[] | null>([]);
 
