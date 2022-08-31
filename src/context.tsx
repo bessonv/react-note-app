@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useReducer } from 'react';
-import mockData from './mockData';
 import reducer from './reducer';
 import { TodoActionKind, TodoModalType } from './enums';
 
@@ -8,7 +7,8 @@ type ProviderProps = {
 }
 
 const initialState: TodoState = {
-  data: mockData as Data[],
+  data: [] as Data[],
+  searchQuery: '',
   currentTodoItem: null,
   isModalOpen: false,
   modalType: TodoModalType.SHOW
@@ -20,7 +20,7 @@ const AppProvider = ({ children }: ProviderProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    // getData();
+    dispatch({ type: TodoActionKind.GET_DATA, payload: true });
   }, [])
 
   const showEditTodo = (id: number) => {
@@ -57,10 +57,14 @@ const AppProvider = ({ children }: ProviderProps) => {
     dispatch({ type: TodoActionKind.OPEN_MODAL, payload: false });
   }
 
-  // const getData = () => {
-  //   const data = mockData;
-  //   dispatch({ type: 'DISPLAY_ITEMS', payload: data });
-  // }
+  const search = (query: string) => {
+    // TODO: change when API is ready
+    // if (query) {
+      dispatch({ type: TodoActionKind.FILTER, payload: query });
+    // } else {
+    //   dispatch({ type: TodoActionKind.GET_DATA, payload: true });
+    // }
+  }
 
   return (
       <AppContext.Provider value= {
@@ -73,7 +77,8 @@ const AppProvider = ({ children }: ProviderProps) => {
           showEditTodo, 
           editTodo, 
           deleteTodo, 
-          closeModal
+          closeModal,
+          search
         }
       } >
         {children}

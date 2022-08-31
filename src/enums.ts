@@ -5,7 +5,9 @@ export enum TodoActionKind {
   DELETE = 'DELETE',
   OPEN_MODAL = 'OPEN_MODAL',
   CLEAR = 'CLEAR',
-  CLOSE_MODAL = 'CLOSE_MODAL'
+  CLOSE_MODAL = 'CLOSE_MODAL',
+  FILTER = 'FILTER',
+  GET_DATA = 'GET_DATA'
 }
 
 export enum TodoModalType {

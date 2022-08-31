@@ -1,4 +1,5 @@
 import { TodoActionKind } from './enums';
+import mockData from './mockData';
 
 function reducer(state: TodoState, action: TodoAction): TodoState {
   const { type, payload } = action;
@@ -6,15 +7,15 @@ function reducer(state: TodoState, action: TodoAction): TodoState {
   if (type ===  TodoActionKind.GET) {
     const currentTodoItem = state.data.find(el => el.key === payload);
     if (currentTodoItem) // TODO: show error
-      return { ...state, currentTodoItem }
+      return { ...state, currentTodoItem };
   }
 
   if (type === TodoActionKind.CLOSE_MODAL) {
-    return { ...state, modalType: payload, isModalOpen: true }
+    return { ...state, modalType: payload, isModalOpen: true };
   }
 
   if (type === TodoActionKind.CLEAR) {
-    return { ...state, currentTodoItem: null }
+    return { ...state, currentTodoItem: null };
   }
 
   if (type === TodoActionKind.ADD) {
@@ -47,7 +48,19 @@ function reducer(state: TodoState, action: TodoAction): TodoState {
   }
 
   if (type === TodoActionKind.OPEN_MODAL) {
-    return { ...state, isModalOpen: payload }
+    return { ...state, isModalOpen: payload };
+  }
+
+  if (type === TodoActionKind.FILTER) {
+    // TODO: change when API is ready
+    // let newData = mockData.filter(item => item.name.includes(payload) || item.description.includes(payload));
+    // return { ...state, data: newData };
+    return { ...state, searchQuery: payload }
+  }
+
+  if (type === TodoActionKind.GET_DATA) {
+    let data = mockData;
+    return { ...state, data };
   }
 
   return state;
