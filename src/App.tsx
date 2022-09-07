@@ -20,7 +20,6 @@ function App() {
       <main>
         <div className="control">
           <Search />
-          {/* <input type="text" className="control__search todo-input" placeholder="search"/> */}
           <button onClick={state.showAddTodo} className="control__button button-medium">Add new ToDo</button>
         </div>
         <TodoList data={state.data} />
@@ -30,7 +29,6 @@ function App() {
             { state.modalType === TodoModalType.SHOW && <Display data={state.currentTodoItem || undefined} /> }
             { state.modalType === TodoModalType.ADD && <AddForm /> }
             { state.modalType === TodoModalType.EDIT && <AddForm todo={state.currentTodoItem || undefined} />}
-            {/* { state.currentTodoItem ? <Display data={state.currentTodoItem} /> : <AddForm /> } */}
           </Modal>
         }
       </main>

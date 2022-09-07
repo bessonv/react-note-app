@@ -21,7 +21,7 @@ const AddForm = ({ todo }: FormProps) => {
     const description = target.todoDescription.value;
 
     if (todo) {
-      state.editTodo(todo.key, name, description);
+      state.editTodo({ ...todo, name, description });
     } else {
       state.addTodo(name, description);
     }

@@ -1,5 +1,4 @@
 import { TodoActionKind } from './enums';
-import mockData from './mockData';
 
 function reducer(state: TodoState, action: TodoAction): TodoState {
   const { type, payload } = action;
@@ -19,11 +18,12 @@ function reducer(state: TodoState, action: TodoAction): TodoState {
   }
 
   if (type === TodoActionKind.ADD) {
+    const {key, name, description, created } = payload;
     const newTodo: Data = {
-      key: state.data[state.data.length - 1].key + 1,
-      name: payload.name,
-      description: payload.description,
-      createdDate: new Date()
+      key,
+      name,
+      description,
+      created: new Date(Number(created) || created)
     }
     const newData = [...state.data, newTodo];
     return { ...state, data: newData, isModalOpen: false };
@@ -31,9 +31,13 @@ function reducer(state: TodoState, action: TodoAction): TodoState {
 
   if (type === TodoActionKind.EDIT) {
     const newData = state.data.map(item => {
-      if (item.key === payload.id) {
+      if (item.key === payload.key) {
+        const { name, description, created } = payload;
         const editedTodo: Data = {
-          ...item, name: payload.name, description: payload.description
+          ...item, 
+          name, 
+          description, 
+          created: new Date(Number(created) || created)
         }
         return editedTodo;
       }
@@ -51,15 +55,11 @@ function reducer(state: TodoState, action: TodoAction): TodoState {
     return { ...state, isModalOpen: payload };
   }
 
-  if (type === TodoActionKind.FILTER) {
-    // TODO: change when API is ready
-    // let newData = mockData.filter(item => item.name.includes(payload) || item.description.includes(payload));
-    // return { ...state, data: newData };
-    return { ...state, searchQuery: payload }
-  }
-
-  if (type === TodoActionKind.GET_DATA) {
-    let data = mockData;
+  if (type === TodoActionKind.SET_DATA) {
+    const data = payload.map((item: Data) => {
+      const createdDate = Number(item.created) || item.created;
+      return { ...item, created: new Date(createdDate) }
+    })
     return { ...state, data };
   }
 

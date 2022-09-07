@@ -1,6 +1,7 @@
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useCallback, useContext, useEffect, useReducer } from 'react';
 import reducer from './reducer';
 import { TodoActionKind, TodoModalType } from './enums';
+import { API_URL, apiOptions } from './api';
 
 type ProviderProps = {
   children?: React.ReactNode
@@ -18,10 +19,29 @@ const AppContext = React.createContext<AppContextInterface | null>(null);
 
 const AppProvider = ({ children }: ProviderProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  // console.log('appprovider');
+
+  // const search = useCallback((query: string) => {
+  //   fetchSearch(query);
+  // }, [fetchSearch])
 
   useEffect(() => {
-    dispatch({ type: TodoActionKind.GET_DATA, payload: true });
+    console.trace();
+    console.log('useeffectprovider');
+    showAllTodos();
   }, [])
+
+  const showAllTodos = () => {
+    fetch(
+      `${API_URL}/todos`, apiOptions('GET')
+    ).then(response => response.json()
+    ).then(response => {
+      console.log(response);
+      if (response.count) {
+        dispatch({ type: TodoActionKind.SET_DATA, payload: response.items });
+      }
+    }).catch(err => console.error(err))
+  }
 
   const showEditTodo = (id: number) => {
     dispatch({ type: TodoActionKind.GET, payload: id });
@@ -42,15 +62,52 @@ const AppProvider = ({ children }: ProviderProps) => {
   }
 
   const addTodo = (name: string, description: string) => {
-    dispatch({ type: TodoActionKind.ADD, payload: {name, description} });
+    const body = {
+      name,
+      description,
+      created: new Date().getTime()
+    }
+    fetch(
+      `${API_URL}/todos`, apiOptions('POST', JSON.stringify(body))
+    ).then(response => response.json()
+    ).then(response => {
+      console.log(response);
+      const { key, name, description, created } = response;
+      const newData: Data = {
+        key, name, description, created
+      }
+      dispatch({ type: TodoActionKind.ADD, payload: newData });
+    }).catch(err => console.error(err))
   }
 
-  const editTodo = (id: number, name: string, description: string) => {
-    dispatch({ type: TodoActionKind.EDIT, payload: {id, name, description} });
+  const editTodo = (editData: Data) => {
+    const body = {
+      name: editData.name,
+      description: editData.description,
+      created: editData.created.toLocaleDateString()
+    }
+    fetch(
+      `${API_URL}/todos/${editData.key}`, apiOptions('PUT', JSON.stringify(body))
+    ).then(response => response.json()
+    ).then(response => {
+      console.log(response);
+      const { key, name, description, created } = response;
+      dispatch({ type: TodoActionKind.EDIT, payload: {key, name, description, created} });
+    }).catch(err => console.error(err))
   }
 
   const deleteTodo = (id: number) => {
-    dispatch({ type: TodoActionKind.DELETE, payload: id });
+    fetch(
+      `${API_URL}/todos/${id}`, apiOptions('DELETE')
+    ).then(response => response.json()
+    ).then(response => {
+      console.log(response);
+      if (response.message === 'deleted') {
+        dispatch({ type: TodoActionKind.DELETE, payload: id });
+      } else {
+        console.error('item was not deleted', response);
+      }
+    }).catch(err => console.error(err))
   }
 
   const closeModal = () => {
@@ -58,19 +115,28 @@ const AppProvider = ({ children }: ProviderProps) => {
   }
 
   const search = (query: string) => {
-    // TODO: change when API is ready
-    // if (query) {
-      dispatch({ type: TodoActionKind.FILTER, payload: query });
-    // } else {
-    //   dispatch({ type: TodoActionKind.GET_DATA, payload: true });
-    // }
+    // TODO: add to use callback
+    if (query) {
+      fetch(
+        `${API_URL}/search-by-str/${query}`, apiOptions('GET')
+      ).then(response => response.json()
+      ).then(response => {
+        console.log(response);
+        if (response.length) {
+          dispatch({ type: TodoActionKind.SET_DATA, payload: response });
+        }
+      }).catch(err => console.error(err))
+    } else {
+      showAllTodos();
+    }
   }
 
   return (
       <AppContext.Provider value= {
         {
           ...state, 
-          showTodo, 
+          showTodo,
+          showAllTodos, 
           clearCurrent, 
           showAddTodo, 
           addTodo, 

@@ -2,7 +2,7 @@ type Data = {
   key: number,
   name: string,
   description: string,
-  createdDate: Date
+  created: Date
 }
 
 
@@ -21,11 +21,12 @@ interface AppContextInterface {
   isModalOpen: boolean,
   modalType: TodoModalType,
   showTodo(id: number): void,
+  showAllTodos(): void,
   showEditTodo(id: number): void,
   showAddTodo(): void,
   clearCurrent(): void,
   addTodo(name: string, description: string): void,
-  editTodo(id: number, name: string, description: string): void,
+  editTodo(editData: Data): void,
   deleteTodo(id: number): void,
   closeModal(): void,
   search(query: string): void
@@ -42,9 +43,14 @@ type EditObject = {
   description: string
 }
 
+interface TodoActionDataArr {
+  type: TodoActionKind.SET_DATA,
+  payload: Data[]
+}
+
 interface TodoActionData {
   type: TodoActionKind.ADD,
-  payload: AddObject
+  payload: Data
 }
 
 interface TodoActionId {
@@ -53,13 +59,13 @@ interface TodoActionId {
 }
 
 interface TodoActionModal {
-  type: TodoActionKind.OPEN_MODAL | TodoActionKind.CLEAR | TodoActionKind.GET_DATA,
+  type: TodoActionKind.OPEN_MODAL | TodoActionKind.CLEAR,
   payload: boolean
 }
 
 interface TodoActionEdit {
   type: TodoActionKind.EDIT,
-  payload: EditObject
+  payload: Data
 }
 
 interface TodoActionModalType {
@@ -67,12 +73,7 @@ interface TodoActionModalType {
   payload: TodoModalType
 }
 
-interface TodoActionFilter {
-  type: TodoActionKind.FILTER,
-  payload: string
-}
-
-type TodoAction = TodoActionData | TodoActionId | TodoActionModal | TodoActionEdit | TodoActionModalType | TodoActionFilter;
+type TodoAction = TodoActionData | TodoActionId | TodoActionModal | TodoActionEdit | TodoActionModalType | TodoActionDataArr;
 
 enum TodoActionKind {
   ADD = 'ADD',
@@ -82,8 +83,7 @@ enum TodoActionKind {
   OPEN_MODAL = 'OPEN_MODAL',
   CLEAR = 'CLEAR',
   CLOSE_MODAL = 'CLOSE_MODAL',
-  FILTER = 'FILTER',
-  GET_DATA = 'GET_DATA'
+  SET_DATA = 'SET_DATA'
 }
 
 enum TodoModalType {

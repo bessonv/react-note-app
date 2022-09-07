@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./TodoList.scss";
 import TodoItem from "../TodoItem/TodoItem";
-import { useGlobalContext } from "../../context";
 
 type ListProps = {
   data?: Data[]
@@ -9,10 +8,12 @@ type ListProps = {
 
 const TodoList = ({ data }: ListProps) => {
   const [list, setList] = useState<Data[] | null>([]);
-  const state = useGlobalContext() as AppContextInterface;
 
   useEffect(() => {
     if (data) {
+      data.sort((a: Data, b: Data) => {
+        return b.created.getTime() - a.created.getTime();
+      });
       setList(data);
     }
   }, [data]);
@@ -21,10 +22,7 @@ const TodoList = ({ data }: ListProps) => {
     <ul className="todo-list">
       {
         list?.map((element) => {
-          // TODO: change when API is ready
-          if (element.name.includes(state.searchQuery) || element.description.includes(state.searchQuery)) {
-            return <TodoItem key={element.key} data={element} />;
-          }
+          return <TodoItem key={element.key} data={element} />;
         })
       }
     </ul>
