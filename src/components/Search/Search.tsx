@@ -5,7 +5,6 @@ const Search = () => {
   const state = useGlobalContext() as AppContextInterface;
   const [query, changeQuery] = useState('');
   const handleQuery = (e: React.FormEvent<HTMLInputElement>) => {
-    console.log(e.currentTarget.value);
     changeQuery(e.currentTarget.value);
     state.search(e.currentTarget.value);
   }

@@ -13,7 +13,6 @@ const Display = ({ data }: DisplayProps) => {
     if (data)
       state.showEditTodo(data.key);
   }
-  console.log(data?.created);
   return (
     data ? 
       <div className="todo-display">

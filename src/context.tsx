@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useReducer } from 'react';
 import reducer from './reducer';
 import { TodoActionKind, TodoModalType } from './enums';
-import { API_URL, apiOptions } from './api';
+import { fetchApiData } from './api';
 
 type ProviderProps = {
   children?: React.ReactNode
@@ -15,32 +15,32 @@ const initialState: TodoState = {
   modalType: TodoModalType.SHOW
 }
 
+enum RestMethod {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE'
+}
+
 const AppContext = React.createContext<AppContextInterface | null>(null);
 
 const AppProvider = ({ children }: ProviderProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  // console.log('appprovider');
 
   // const search = useCallback((query: string) => {
   //   fetchSearch(query);
   // }, [fetchSearch])
 
   useEffect(() => {
-    console.trace();
-    console.log('useeffectprovider');
     showAllTodos();
   }, [])
 
   const showAllTodos = () => {
-    fetch(
-      `${API_URL}/todos`, apiOptions('GET')
-    ).then(response => response.json()
-    ).then(response => {
-      console.log(response);
-      if (response.count) {
-        dispatch({ type: TodoActionKind.SET_DATA, payload: response.items });
+    fetchApiData(RestMethod.GET, 'todos').then(resonse => {
+      if (resonse?.count) {
+        dispatch({ type: TodoActionKind.SET_DATA, payload: resonse.items });
       }
-    }).catch(err => console.error(err))
+    });
   }
 
   const showEditTodo = (id: number) => {
@@ -67,17 +67,15 @@ const AppProvider = ({ children }: ProviderProps) => {
       description,
       created: new Date().getTime()
     }
-    fetch(
-      `${API_URL}/todos`, apiOptions('POST', JSON.stringify(body))
-    ).then(response => response.json()
-    ).then(response => {
-      console.log(response);
-      const { key, name, description, created } = response;
-      const newData: Data = {
-        key, name, description, created
+    fetchApiData(RestMethod.POST, 'todos', JSON.stringify(body)).then(response => {
+      if (response) {
+        const { key, name, description, created } = response;
+        const newData: Data = {
+          key, name, description, created
+        }
+        dispatch({ type: TodoActionKind.ADD, payload: newData });
       }
-      dispatch({ type: TodoActionKind.ADD, payload: newData });
-    }).catch(err => console.error(err))
+    })
   }
 
   const editTodo = (editData: Data) => {
@@ -86,28 +84,20 @@ const AppProvider = ({ children }: ProviderProps) => {
       description: editData.description,
       created: editData.created.toLocaleDateString()
     }
-    fetch(
-      `${API_URL}/todos/${editData.key}`, apiOptions('PUT', JSON.stringify(body))
-    ).then(response => response.json()
-    ).then(response => {
-      console.log(response);
+    fetchApiData(RestMethod.PUT, `todos/${editData.key}`, JSON.stringify(body)).then(response => {
       const { key, name, description, created } = response;
       dispatch({ type: TodoActionKind.EDIT, payload: {key, name, description, created} });
-    }).catch(err => console.error(err))
+    })
   }
 
   const deleteTodo = (id: number) => {
-    fetch(
-      `${API_URL}/todos/${id}`, apiOptions('DELETE')
-    ).then(response => response.json()
-    ).then(response => {
-      console.log(response);
+    fetchApiData(RestMethod.DELETE, `todos/${id}`).then(response => {
       if (response.message === 'deleted') {
         dispatch({ type: TodoActionKind.DELETE, payload: id });
       } else {
         console.error('item was not deleted', response);
       }
-    }).catch(err => console.error(err))
+    })
   }
 
   const closeModal = () => {
@@ -117,15 +107,11 @@ const AppProvider = ({ children }: ProviderProps) => {
   const search = (query: string) => {
     // TODO: add to use callback
     if (query) {
-      fetch(
-        `${API_URL}/search-by-str/${query}`, apiOptions('GET')
-      ).then(response => response.json()
-      ).then(response => {
-        console.log(response);
+      fetchApiData(RestMethod.GET, `search-by-str/${query}`).then(response => {
         if (response.length) {
           dispatch({ type: TodoActionKind.SET_DATA, payload: response });
         }
-      }).catch(err => console.error(err))
+      })
     } else {
       showAllTodos();
     }
