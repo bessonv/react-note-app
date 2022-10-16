@@ -23,12 +23,14 @@ const TodoItem = ({ data }: ItemProps) => {
   }
   return (
     <li className="todo-item">
-      <div className="todo-item__delete"><span className="todo-item__delete_button button-cross" onClick={handleDelete}>X</span></div>
-      <div className="todo-item__content" onClick={handleShow}>
-        <h2 className="todo-item__name">{name}</h2>
+      <article className="todo-item__content" onClick={handleShow}>
+        <header className="todo-item__header">
+          <h2 className="todo-item__name">{name}</h2>
+          <span className="todo-item__delete_button button-cross" onClick={handleDelete}>X</span>
+        </header>
         <p className="todo-item__description">{description.length > 160 ? description.slice(0, 160) + '...' : description}</p>
         <span className="todo-item__date">{`${created.getDate()}.${created.getMonth() + 1}.${created.getFullYear()}`}</span>
-      </div>
+      </article>
     </li>
   )
 }

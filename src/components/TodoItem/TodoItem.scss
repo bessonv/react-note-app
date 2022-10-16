@@ -1,20 +1,17 @@
 .todo-item {
   list-style: none;
   
-  width: 200px;
   height: 300px;
 
   background-color: white;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
 
-  margin: 0 20px 20px 0;
-
   &:hover {
     box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
 
-    .todo-item__delete {
-      display: inherit;
+    .todo-item__delete_button {
+      display: block;
     }
   }
 
@@ -28,7 +25,7 @@
   &__name {
     font-size: 1.2em;
     margin-bottom: 0;
-    flex: 1 1;
+    flex: 4;
   }
 
   &__description {
@@ -50,17 +47,16 @@
     color: #8e8e8e;
   }
 
-  &__delete {
-    display: none;
-    text-align: right;
-    width: 200px;
-    position: absolute;
-    // margin-top: 10px;    
+  &__header {
+    min-height: 30px;
+    padding: 10px 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-    &_button {
-      position: absolute;
-      right: 0;
-      margin: 10px;
-    }
+  &__delete_button {
+    display: none;
   }
 }

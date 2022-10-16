@@ -1,8 +1,8 @@
 .todo-list {
   padding: 0;
   margin: 20px 0 0;
-  
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: left;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  justify-content: space-between;
+  gap: 20px;
 }
