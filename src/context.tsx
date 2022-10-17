@@ -9,6 +9,7 @@ type ProviderProps = {
 
 const initialState: TodoState = {
   data: [] as Data[],
+  isLoaded: false,
   searchQuery: '',
   currentTodoItem: null,
   isModalOpen: false,

@@ -8,6 +8,7 @@ type Data = {
 
 type TodoState = {
   data: Data[],
+  isLoaded: boolean,
   currentTodoItem: Data | null,
   searchQuery: string,
   isModalOpen: boolean,
@@ -16,6 +17,7 @@ type TodoState = {
 
 interface AppContextInterface {
   data: Data[],
+  isLoaded: boolean,
   currentTodoItem: Data | null,
   searchQuery: string,
   isModalOpen: boolean,

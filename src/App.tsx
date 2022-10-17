@@ -6,7 +6,6 @@ import Display from './components/Display/Display';
 import Search from './components/Search/Search';
 
 import { TodoModalType } from './enums';
-
 import { useGlobalContext  } from './context';
 
 function App() {
@@ -22,7 +21,11 @@ function App() {
           <Search />
           <button onClick={state.showAddTodo} className="control__button button-medium">Add new ToDo</button>
         </div>
-        <TodoList data={state.data} />
+        {
+          state.isLoaded ? 
+            <TodoList data={state.data} /> : 
+            <div className='loading_message'>Loading</div>
+        }
         {
           state.isModalOpen && 
           <Modal >

@@ -60,7 +60,7 @@ function reducer(state: TodoState, action: TodoAction): TodoState {
       const createdDate = Number(item.created) || item.created;
       return { ...item, created: new Date(createdDate) }
     })
-    return { ...state, data };
+    return { ...state, data, isLoaded: true };
   }
 
   return state;
