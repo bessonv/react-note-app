@@ -21,9 +21,9 @@ const TodoList = ({ data }: ListProps) => {
   return (
     <ul className="todo-list">
       {
-        list?.map((element) => {
+        list ? list.map((element) => {
           return <TodoItem key={element.key} data={element} />;
-        })
+        }) : <div>The list is empty</div>
       }
     </ul>
   )

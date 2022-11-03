@@ -14,3 +14,11 @@ export enum TodoModalType {
   ADD = 'ADD',
   EDIT = 'EDIT'
 }
+
+
+export enum RestMethod {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE'
+}

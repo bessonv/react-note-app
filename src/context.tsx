@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useReducer } from 'react';
 import reducer from './reducer';
-import { TodoActionKind, TodoModalType } from './enums';
+import { TodoActionKind, TodoModalType, RestMethod } from './enums';
 import { fetchApiData } from './api';
 
 type ProviderProps = {
@@ -14,13 +14,6 @@ const initialState: TodoState = {
   currentTodoItem: null,
   isModalOpen: false,
   modalType: TodoModalType.SHOW
-}
-
-enum RestMethod {
-  GET = 'GET',
-  POST = 'POST',
-  PUT = 'PUT',
-  DELETE = 'DELETE'
 }
 
 const AppContext = React.createContext<AppContextInterface | null>(null);

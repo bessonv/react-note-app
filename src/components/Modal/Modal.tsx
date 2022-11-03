@@ -14,15 +14,15 @@ const Modal = ({ children }: ModalProps) => {
     }
   }
   return (
+    state.isModalOpen ?
     <div className="modal" onClick={handleClose}>
       <div className="modal__content">
         <div className="modal__close">
           <div className="modal__close_button button-cross" onClick={handleClose}>X</div>
         </div>
-        {/* <button onClick={handleClose}>Close modal</button> */}
         {children}
       </div>
-    </div>
+    </div> : <></>
   )
 }
 
