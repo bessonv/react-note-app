@@ -14,16 +14,17 @@ const TodoItem = ({ data }: ItemProps) => {
     name,
     description,
     created
-   } = data;
-  const handleShow = (e: MouseEvent<HTMLDivElement>) => {
+  } = data;
+  const handleShow = (e: MouseEvent<HTMLLIElement>) => {
     state.showTodo(key);
   }
-  const handleDelete = () => {
-    state.deleteTodo(key);
+  const handleDelete = (e: MouseEvent<HTMLSpanElement>) => {
+    e.stopPropagation();
+    state.showDeleteTodo(key);
   }
   return (
-    <li className="todo-item">
-      <article className="todo-item__content" onClick={handleShow}>
+    <li className="todo-item" onClick={handleShow}>
+      <article className="todo-item__content">
         <header className="todo-item__header">
           <h2 className="todo-item__name">{name}</h2>
           <span className="todo-item__delete_button button-cross" onClick={handleDelete}>X</span>

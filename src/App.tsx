@@ -4,10 +4,12 @@ import Modal from './components/Modal/Modal';
 import AddForm from './components/AddForm/AddForm';
 import Display from './components/Display/Display';
 import Search from './components/Search/Search';
+import Confirm from './components/Confirm/Confirm';
 
 import { TodoModalType } from './enums';
 import { useGlobalContext  } from './context';
 import { withLayout } from './layout';
+
 
 type ModalHash = {
   [T in TodoModalType]: JSX.Element
@@ -20,6 +22,7 @@ function App() {
     [TodoModalType.SHOW]: <Display data={state.currentTodoItem || undefined} />,
     [TodoModalType.ADD]: <AddForm />,
     [TodoModalType.EDIT]: <AddForm todo={state.currentTodoItem || undefined} />,
+    [TodoModalType.CONFIRM]: <Confirm data={state.currentTodoItem || undefined} />
   };
   
   return (

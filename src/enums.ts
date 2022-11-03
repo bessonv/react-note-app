@@ -12,7 +12,8 @@ export enum TodoActionKind {
 export enum TodoModalType {
   SHOW = 'SHOW',
   ADD = 'ADD',
-  EDIT = 'EDIT'
+  EDIT = 'EDIT',
+  CONFIRM = 'CONFIRM',
 }
 
 

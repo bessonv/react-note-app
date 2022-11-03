@@ -29,6 +29,7 @@ interface AppContextInterface {
   clearCurrent(): void,
   addTodo(name: string, description: string): void,
   editTodo(editData: Data): void,
+  showDeleteTodo(id: number): void,
   deleteTodo(id: number): void,
   closeModal(): void,
   search(query: string): void
@@ -91,5 +92,6 @@ enum TodoActionKind {
 enum TodoModalType {
   SHOW = 'SHOW',
   ADD = 'ADD',
-  EDIT = 'EDIT'
+  EDIT = 'EDIT',
+  CONFIRM = 'CONFIRM'
 }

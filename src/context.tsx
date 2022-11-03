@@ -84,6 +84,11 @@ const AppProvider = ({ children }: ProviderProps) => {
     })
   }
 
+  const showDeleteTodo = (id: number) => {
+    dispatch({ type: TodoActionKind.GET, payload: id });
+    dispatch({ type: TodoActionKind.CLOSE_MODAL, payload: TodoModalType.CONFIRM });
+  }
+
   const deleteTodo = (id: number) => {
     fetchApiData(RestMethod.DELETE, `todos/${id}`).then(response => {
       if (response.message === 'deleted') {
@@ -121,7 +126,8 @@ const AppProvider = ({ children }: ProviderProps) => {
           showAddTodo, 
           addTodo, 
           showEditTodo, 
-          editTodo, 
+          editTodo,
+          showDeleteTodo,
           deleteTodo, 
           closeModal,
           search
