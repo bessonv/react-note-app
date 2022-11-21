@@ -1,12 +1,9 @@
-import "./AddForm.scss";
+import "./AddForm.style.scss";
+import FormProps from "./AddForm.props";
 import { useGlobalContext } from "../../context/app.context";
 import { useState } from "react";
 
-type FormProps = {
-  todo?: Data
-}
-
-const AddForm = ({ todo }: FormProps) => {
+const AddForm = ({ todo, className, ...props }: FormProps): JSX.Element => {
   const state = useGlobalContext() as AppContextInterface;
   const [name, changeName] = useState(todo?.name || '');
   const [description, changeDescr] = useState(todo?.description || '');
@@ -32,7 +29,11 @@ const AddForm = ({ todo }: FormProps) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="todo-form" >
+    <form
+      onSubmit={handleSubmit} 
+      className={`${className ?? ''} todo-form`}
+      {...props}
+    >
       <label className="todo-form__name">
         <span>Name:</span>
         <input 

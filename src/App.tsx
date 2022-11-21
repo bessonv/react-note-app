@@ -28,8 +28,13 @@ function App() {
   return (
     <>
       <div className="control">
-        <Search />
-        <button onClick={state.showAddTodo} className="control__button button-medium">Add new ToDo</button>
+        <Search className="control__search"/>
+        <button 
+          onClick={state.showAddTodo} 
+          className="control__button button-medium"
+        >
+          Add new ToDo
+        </button>
       </div>
       {
         state.isLoaded ? 

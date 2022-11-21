@@ -1,9 +1,6 @@
-import "./Confirm.scss";
+import "./Confirm.style.scss";
+import ConfirmProps from "./Confirm.props";
 import { useGlobalContext } from "../../context/app.context";
-
-interface ConfirmProps {
-  data?: Data
-}
 
 const Confirm = ({ data }: ConfirmProps): JSX.Element => {
 

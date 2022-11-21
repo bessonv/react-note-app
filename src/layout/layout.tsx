@@ -1,7 +1,6 @@
 import {ReactNode, FunctionComponent} from "react";
 import { AppProvider } from '../context/app.context';
 
-
 interface LayoutProps {
   children: ReactNode;
 }

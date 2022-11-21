@@ -41,5 +41,5 @@ export const fetchApiData = (method: string, url: string, body?: string) => {
     } else {
       throw new Error('Empty response');
     }
-  }).catch(err => console.error());
+  }).catch(err => console.error(err));
 };
