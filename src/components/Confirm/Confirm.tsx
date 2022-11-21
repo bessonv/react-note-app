@@ -1,5 +1,5 @@
 import "./Confirm.scss";
-import { useGlobalContext } from "../../context";
+import { useGlobalContext } from "../../context/app.context";
 
 interface ConfirmProps {
   data?: Data

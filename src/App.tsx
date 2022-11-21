@@ -7,8 +7,8 @@ import Search from './components/Search/Search';
 import Confirm from './components/Confirm/Confirm';
 
 import { TodoModalType } from './enums';
-import { useGlobalContext  } from './context';
-import { withLayout } from './layout';
+import { useGlobalContext  } from './context/app.context';
+import { withLayout } from './layout/layout';
 
 
 type ModalHash = {

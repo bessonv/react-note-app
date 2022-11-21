@@ -1,6 +1,6 @@
 import './Modal.scss';
 import { MouseEvent } from 'react';
-import { useGlobalContext } from "../../context";
+import { useGlobalContext } from "../../context/app.context";
 
 type ModalProps = {
   children?: React.ReactNode

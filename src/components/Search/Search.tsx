@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useGlobalContext } from "../../context";
+import { useGlobalContext } from "../../context/app.context";
 
 const Search = () => {
   const state = useGlobalContext() as AppContextInterface;

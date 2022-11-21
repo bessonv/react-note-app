@@ -1,4 +1,4 @@
-import { TodoActionKind } from './enums';
+import { TodoActionKind } from '../enums';
 
 function reducer(state: TodoState, action: TodoAction): TodoState {
   const { type, payload } = action;

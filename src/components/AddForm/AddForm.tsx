@@ -1,5 +1,5 @@
 import "./AddForm.scss";
-import { useGlobalContext } from "../../context";
+import { useGlobalContext } from "../../context/app.context";
 import { useState } from "react";
 
 type FormProps = {

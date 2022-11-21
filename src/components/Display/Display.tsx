@@ -1,4 +1,4 @@
-import { useGlobalContext } from "../../context";
+import { useGlobalContext } from "../../context/app.context";
 import "./Display.scss";
 
 type DisplayProps = {

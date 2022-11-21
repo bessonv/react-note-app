@@ -1,6 +1,6 @@
 import "./TodoItem.scss";
 import { MouseEvent } from 'react';
-import { useGlobalContext } from "../../context";
+import { useGlobalContext } from "../../context/app.context";
 
 type ItemProps = {
   data: Data,
