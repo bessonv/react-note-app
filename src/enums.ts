@@ -9,6 +9,11 @@ export enum TodoActionKind {
   SET_DATA = 'SET_DATA'
 }
 
+export enum ModalActionKind {
+  OPEN_MODAL = 'OPEN_MODAL',
+  CLOSE_MODAL = 'CLOSE_MODAL',
+}
+
 export enum TodoModalType {
   SHOW = 'SHOW',
   ADD = 'ADD',

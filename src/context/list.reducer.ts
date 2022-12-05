@@ -1,16 +1,12 @@
 import { TodoActionKind } from '../enums';
 
-function reducer(state: TodoState, action: TodoAction): TodoState {
+function listReducer(state: TodoState, action: TodoAction): TodoState {
   const { type, payload } = action;
 
   if (type ===  TodoActionKind.GET) {
     const currentTodoItem = state.data.find(el => el.key === payload);
     if (currentTodoItem) // TODO: show error
       return { ...state, currentTodoItem };
-  }
-
-  if (type === TodoActionKind.CLOSE_MODAL) {
-    return { ...state, modalType: payload, isModalOpen: true };
   }
 
   if (type === TodoActionKind.CLEAR) {
@@ -26,7 +22,7 @@ function reducer(state: TodoState, action: TodoAction): TodoState {
       created: new Date(Number(created) || created)
     }
     const newData = [...state.data, newTodo];
-    return { ...state, data: newData, isModalOpen: false };
+    return { ...state, data: newData };
   }
 
   if (type === TodoActionKind.EDIT) {
@@ -43,16 +39,12 @@ function reducer(state: TodoState, action: TodoAction): TodoState {
       }
       return item;
     });
-    return { ...state, data: newData, isModalOpen: false };
+    return { ...state, data: newData };
   }
 
   if (type === TodoActionKind.DELETE) {
     let newData = state.data.filter(item => item.key !== payload);
     return { ...state, data: newData };
-  }
-
-  if (type === TodoActionKind.OPEN_MODAL) {
-    return { ...state, isModalOpen: payload };
   }
 
   if (type === TodoActionKind.SET_DATA) {
@@ -67,4 +59,4 @@ function reducer(state: TodoState, action: TodoAction): TodoState {
   // throw new Error('no matching action type');
 }
 
-export default reducer;
+export default listReducer;

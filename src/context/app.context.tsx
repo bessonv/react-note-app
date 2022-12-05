@@ -1,17 +1,21 @@
 import React, { useContext, useEffect, useReducer } from 'react';
-import reducer from './app.reducer';
-import { TodoActionKind, TodoModalType } from '../enums';
+import listReducer from './list.reducer';
+import { TodoActionKind, TodoModalType, ModalActionKind } from '../enums';
 import { API, fetchApiData } from '../api/api';
+import modalReducer from './modal.reducer';
 
 type ProviderProps = {
   children?: React.ReactNode
 }
 
-const initialState: TodoState = {
+const listInitialState: TodoState = {
   data: [] as Data[],
   isLoaded: false,
   searchQuery: '',
-  currentTodoItem: null,
+  currentTodoItem: null
+}
+
+const modalInitState: ModalState = {
   isModalOpen: false,
   modalType: TodoModalType.SHOW
 }
@@ -19,7 +23,8 @@ const initialState: TodoState = {
 const AppContext = React.createContext<AppContextInterface | null>(null);
 
 const AppProvider = ({ children }: ProviderProps) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [listState, dispatch] = useReducer(listReducer, listInitialState);
+  const [modalState, dispatchModal] = useReducer(modalReducer, modalInitState);
 
   useEffect(() => {
     showAllTodos();
@@ -34,16 +39,16 @@ const AppProvider = ({ children }: ProviderProps) => {
 
   const showEditTodo = (id: number) => {
     dispatch({ type: TodoActionKind.GET, payload: id });
-    dispatch({ type: TodoActionKind.CLOSE_MODAL, payload: TodoModalType.EDIT });
+    dispatchModal({ type: ModalActionKind.CLOSE_MODAL, payload: TodoModalType.EDIT });
   }
 
   const showAddTodo = () => {
-    dispatch({ type: TodoActionKind.CLOSE_MODAL, payload: TodoModalType.ADD });
+    dispatchModal({ type: ModalActionKind.CLOSE_MODAL, payload: TodoModalType.ADD });
   }
 
   const showTodo = (id: number) => {
     dispatch({ type: TodoActionKind.GET, payload: id });
-    dispatch({ type: TodoActionKind.CLOSE_MODAL, payload: TodoModalType.SHOW });
+    dispatchModal({ type: ModalActionKind.CLOSE_MODAL, payload: TodoModalType.SHOW });
   }
 
   const clearCurrent = () => {
@@ -66,6 +71,7 @@ const AppProvider = ({ children }: ProviderProps) => {
         key, name, description, created
       }
       dispatch({ type: TodoActionKind.ADD, payload: newData });
+      dispatchModal({ type: ModalActionKind.OPEN_MODAL, payload: false });
     }
   }
 
@@ -81,11 +87,12 @@ const AppProvider = ({ children }: ProviderProps) => {
       JSON.stringify(body));
     const { key, name, description, created } = response;
     dispatch({ type: TodoActionKind.EDIT, payload: {key, name, description, created} });
+    dispatchModal({ type: ModalActionKind.OPEN_MODAL, payload: false });
   }
 
   const showDeleteTodo = (id: number) => {
     dispatch({ type: TodoActionKind.GET, payload: id });
-    dispatch({ type: TodoActionKind.CLOSE_MODAL, payload: TodoModalType.CONFIRM });
+    dispatchModal({ type: ModalActionKind.CLOSE_MODAL, payload: TodoModalType.CONFIRM });
   }
 
   const deleteTodo = async (id: number) => {
@@ -98,7 +105,7 @@ const AppProvider = ({ children }: ProviderProps) => {
   }
 
   const closeModal = () => {
-    dispatch({ type: TodoActionKind.OPEN_MODAL, payload: false });
+    dispatchModal({ type: ModalActionKind.OPEN_MODAL, payload: false });
   }
 
   const search = async (query: string) => {
@@ -114,7 +121,8 @@ const AppProvider = ({ children }: ProviderProps) => {
   return (
       <AppContext.Provider value= {
         {
-          ...state, 
+          ...listState,
+          ...modalState,
           showTodo,
           showAllTodos, 
           clearCurrent, 

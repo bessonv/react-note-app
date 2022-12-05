@@ -10,9 +10,7 @@ type TodoState = {
   data: Data[],
   isLoaded: boolean,
   currentTodoItem: Data | null,
-  searchQuery: string,
-  isModalOpen: boolean,
-  modalType: TodoModalType
+  searchQuery: string
 }
 
 interface AppContextInterface {
@@ -66,6 +64,11 @@ interface TodoActionModal {
   payload: boolean
 }
 
+interface TodoActionCurrent {
+  type: TodoActionKind.CLEAR,
+  payload: boolean
+}
+
 interface TodoActionEdit {
   type: TodoActionKind.EDIT,
   payload: Data
@@ -76,7 +79,7 @@ interface TodoActionModalType {
   payload: TodoModalType
 }
 
-type TodoAction = TodoActionData | TodoActionId | TodoActionModal | TodoActionEdit | TodoActionModalType | TodoActionDataArr;
+type TodoAction = TodoActionData | TodoActionId | TodoActionCurrent | TodoActionEdit | TodoActionDataArr;
 
 enum TodoActionKind {
   ADD = 'ADD',
@@ -94,4 +97,9 @@ enum TodoModalType {
   ADD = 'ADD',
   EDIT = 'EDIT',
   CONFIRM = 'CONFIRM'
+}
+
+type ModalState = {
+  isModalOpen: boolean,
+  modalType: TodoModalType
 }
