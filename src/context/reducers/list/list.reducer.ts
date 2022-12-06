@@ -1,4 +1,5 @@
-import { TodoActionKind } from '../enums';
+import { TodoActionKind } from '../../../enums';
+import { TodoAction, TodoState } from './reducer.types';
 
 function listReducer(state: TodoState, action: TodoAction): TodoState {
   const { type, payload } = action;
@@ -52,11 +53,10 @@ function listReducer(state: TodoState, action: TodoAction): TodoState {
       const createdDate = Number(item.created) || item.created;
       return { ...item, created: new Date(createdDate) }
     })
-    return { ...state, data, isLoaded: true };
+    return { ...state, data };
   }
-
-  return state;
-  // throw new Error('no matching action type');
+  
+  throw Error('Unknown action');
 }
 
 export default listReducer;

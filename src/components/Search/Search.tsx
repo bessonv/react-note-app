@@ -3,7 +3,7 @@ import SearchProps from "./Search.props";
 import { useGlobalContext } from "../../context/app.context";
 
 const Search = ({ className, ...props }: SearchProps): JSX.Element => {
-  const state = useGlobalContext() as AppContextInterface;
+  const state = useGlobalContext();
   const [query, changeQuery] = useState('');
   const handleQuery = useCallback((e: FormEvent<HTMLInputElement>) => {
     changeQuery(e.currentTarget.value);

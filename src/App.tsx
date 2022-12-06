@@ -16,7 +16,7 @@ type ModalHash = {
 }
 
 function App() {
-  const state = useGlobalContext() as AppContextInterface;
+  const state = useGlobalContext();
 
   let mHash: ModalHash = {
     [TodoModalType.SHOW]: <Display data={state.currentTodoItem || undefined} />,

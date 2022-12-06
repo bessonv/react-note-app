@@ -3,15 +3,13 @@ export enum TodoActionKind {
   GET = 'GET',
   EDIT = 'EDIT',
   DELETE = 'DELETE',
-  OPEN_MODAL = 'OPEN_MODAL',
   CLEAR = 'CLEAR',
-  CLOSE_MODAL = 'CLOSE_MODAL',
   SET_DATA = 'SET_DATA'
 }
 
 export enum ModalActionKind {
+  CLOSE_MODAL = 'CHANGE_MODAL',
   OPEN_MODAL = 'OPEN_MODAL',
-  CLOSE_MODAL = 'CLOSE_MODAL',
 }
 
 export enum TodoModalType {
@@ -20,7 +18,6 @@ export enum TodoModalType {
   EDIT = 'EDIT',
   CONFIRM = 'CONFIRM',
 }
-
 
 export enum RestMethod {
   GET = 'GET',

@@ -4,7 +4,7 @@ import { useGlobalContext } from "../../context/app.context";
 
 const Confirm = ({ data }: ConfirmProps): JSX.Element => {
 
-  const state = useGlobalContext() as AppContextInterface;
+  const state = useGlobalContext();
 
   const handleConfirm = (type: boolean) => {
     if (type && data) {

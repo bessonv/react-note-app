@@ -4,7 +4,7 @@ import { useGlobalContext } from "../../context/app.context";
 import { useState } from "react";
 
 const AddForm = ({ todo, className, ...props }: FormProps): JSX.Element => {
-  const state = useGlobalContext() as AppContextInterface;
+  const state = useGlobalContext();
   const [name, changeName] = useState(todo?.name || '');
   const [description, changeDescr] = useState(todo?.description || '');
 

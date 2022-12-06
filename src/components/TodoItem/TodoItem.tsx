@@ -4,7 +4,7 @@ import { MouseEvent } from 'react';
 import { useGlobalContext } from "../../context/app.context";
 
 const TodoItem = ({ data, className, ...props }: ItemProps): JSX.Element => {
-  const state = useGlobalContext() as AppContextInterface;
+  const state = useGlobalContext();
   const {
     key,
     name,

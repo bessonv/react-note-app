@@ -4,7 +4,7 @@ import { useGlobalContext } from "../../context/app.context";
 
 const Display = ({ data, className, ...props }: DisplayProps): JSX.Element => {
 
-  const state = useGlobalContext() as AppContextInterface;
+  const state = useGlobalContext();
 
   const handleEdit = () => {
     if (data)
