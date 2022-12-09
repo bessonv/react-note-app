@@ -19,13 +19,14 @@ const modalInitState: ModalState = {
 
 const AppContext = createContext<AppContextInterface | null>(null);
 
-const AppProvider = ({ children }: ProviderProps) => {
-  const [listState, dispatchList] = useReducer(listReducer, listInitialState);
-  const [modalState, dispatchModal] = useReducer(modalReducer, modalInitState);
+const AppProvider = ({ children, initialList, initialModal }: ProviderProps) => {
+  const [listState, dispatchList] = useReducer(listReducer, initialList ?? listInitialState);
+  const [modalState, dispatchModal] = useReducer(modalReducer, initialModal ?? modalInitState);
   const [isLoaded, setLoadState] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   useEffect(() => {
+    if (initialList && initialModal) return;
     showAllTodos();
   }, [])
 
