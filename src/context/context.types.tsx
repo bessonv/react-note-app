@@ -1,7 +1,11 @@
 import { TodoModalType } from "../enums"
+import { TodoState } from "./reducers/list/reducer.types"
+import { ModalState } from "./reducers/modal/reducer.types"
 
 export type ProviderProps = {
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  initialList?: TodoState,
+  initialModal?: ModalState
 }
 
 export interface AppContextInterface {
