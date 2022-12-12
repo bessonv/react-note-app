@@ -21,7 +21,7 @@ const TodoList = ({ data, className, ...props }: ListProps): JSX.Element => {
       {...props}
     >
       {
-        list ? list.map((element) => {
+        (list && list.length > 0) ? list.map((element) => {
           return <TodoItem key={element.key} data={element} />;
         }) : <div>The list is empty</div>
       }

@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import TodoItem from './TodoItem';
-import { mockData, providerProps } from '../../mocks/mockData';
+import { mockData, mockDataProps } from '../../mocks/mockData';
 import { customRender } from '../../mocks/customRender';
 
 const dataItem = mockData[0];
@@ -8,7 +8,7 @@ const dataItem = mockData[0];
 describe("TodoItem component", () => {
   test('should render component correctly', () => {
 
-    customRender(<TodoItem data={dataItem} />, providerProps);
+    customRender(<TodoItem data={dataItem} />, mockDataProps);
 
     const header = screen.getByRole("heading", { level: 2 });
     expect(header).toBeInTheDocument();
