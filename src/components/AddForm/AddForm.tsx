@@ -10,12 +10,6 @@ const AddForm = ({ todo, className, ...props }: FormProps): JSX.Element => {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const target = e.target as typeof e.target & {
-      todoName: { value: string };
-      todoDescription: { value: string };
-    };
-    const name = target.todoName.value;
-    const description = target.todoDescription.value;
 
     if (todo) {
       state.editTodo({ ...todo, name, description });

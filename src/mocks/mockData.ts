@@ -10,7 +10,7 @@ export const mockData: Data[] = [
   { key: 5, name: 'shopping', description: 'buy a shampoo', created: new Date() },
 ];
 
-export const providerProps: ProviderProps = {
+export const mockDataProps: ProviderProps = {
   initialList: {
     data: mockData,
     currentTodoItem: null

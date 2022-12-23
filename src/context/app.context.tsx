@@ -19,16 +19,11 @@ const modalInitState: ModalState = {
 
 const AppContext = createContext<AppContextInterface | null>(null);
 
-const AppProvider = ({ children, initialList, initialModal }: ProviderProps) => {
+const AppProvider = ({ children, initialList, initialModal, functions }: ProviderProps) => {
   const [listState, dispatchList] = useReducer(listReducer, initialList ?? listInitialState);
   const [modalState, dispatchModal] = useReducer(modalReducer, initialModal ?? modalInitState);
   const [isLoaded, setLoadState] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
-
-  useEffect(() => {
-    if (initialList && initialModal) return;
-    showAllTodos();
-  }, [])
 
   const showAllTodos = async () => {
     const resonse = await fetchApiData(API.getList.method, API.getList.url);
@@ -136,7 +131,8 @@ const AppProvider = ({ children, initialList, initialModal }: ProviderProps) => 
           showDeleteTodo,
           deleteTodo, 
           closeModal,
-          search
+          search,
+          ...functions
         }
       } >
         {children}

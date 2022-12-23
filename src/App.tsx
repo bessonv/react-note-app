@@ -9,6 +9,7 @@ import Confirm from './components/Confirm/Confirm';
 import { TodoModalType } from './enums';
 import { useGlobalContext  } from './context/app.context';
 import { withLayout } from './layout/layout';
+import { useEffect } from 'react';
 
 
 type ModalHash = {
@@ -17,6 +18,10 @@ type ModalHash = {
 
 function App() {
   const state = useGlobalContext();
+
+  useEffect(() => {
+    state.showAllTodos();
+  }, []);
 
   let mHash: ModalHash = {
     [TodoModalType.SHOW]: <Display data={state.currentTodoItem || undefined} />,
