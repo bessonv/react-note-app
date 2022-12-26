@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/react-todo-list/static/css/main.f14888c4.css",
-    "main.js": "/react-todo-list/static/js/main.906dd083.js",
-    "static/js/787.7f2c2da0.chunk.js": "/react-todo-list/static/js/787.7f2c2da0.chunk.js",
-    "index.html": "/react-todo-list/index.html",
-    "static/media/loading.svg": "/react-todo-list/static/media/loading.d69a83c9c7ea696f9386.svg",
-    "main.f14888c4.css.map": "/react-todo-list/static/css/main.f14888c4.css.map",
-    "main.906dd083.js.map": "/react-todo-list/static/js/main.906dd083.js.map",
-    "787.7f2c2da0.chunk.js.map": "/react-todo-list/static/js/787.7f2c2da0.chunk.js.map"
+    "main.css": "/react-note-app/static/css/main.710db2d3.css",
+    "main.js": "/react-note-app/static/js/main.a28a90ad.js",
+    "static/js/787.cbac3f32.chunk.js": "/react-note-app/static/js/787.cbac3f32.chunk.js",
+    "index.html": "/react-note-app/index.html",
+    "static/media/loading.svg": "/react-note-app/static/media/loading.d69a83c9c7ea696f9386.svg",
+    "main.710db2d3.css.map": "/react-note-app/static/css/main.710db2d3.css.map",
+    "main.a28a90ad.js.map": "/react-note-app/static/js/main.a28a90ad.js.map",
+    "787.cbac3f32.chunk.js.map": "/react-note-app/static/js/787.cbac3f32.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f14888c4.css",
-    "static/js/main.906dd083.js"
+    "static/css/main.710db2d3.css",
+    "static/js/main.a28a90ad.js"
   ]
 }
