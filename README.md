@@ -1,4 +1,4 @@
-# Todo List App
+# Note App
 
 A small web app for saving notes.
 Created with React.js, TypeScript, React Hooks, Context API, SCSS

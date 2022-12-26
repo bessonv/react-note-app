@@ -1,12 +1,12 @@
 import { screen } from '@testing-library/react';
-import TodoList from './TodoList';
+import NoteList from './NoteList';
 import { mockData, mockDataProps } from '../../mocks/mockData';
 import { customRender } from '../../mocks/customRender';
 
-describe("TodoList component", () => {
+describe("NoteList component", () => {
   test('should render component correctly', () => {
 
-    customRender(<TodoList data={mockData} />, mockDataProps);
+    customRender(<NoteList data={mockData} />, mockDataProps);
 
     const list = screen.getByRole("list");
     expect(list).toBeInTheDocument();
@@ -15,9 +15,9 @@ describe("TodoList component", () => {
   test('should show empty message', () => {
 
     const emptyDataProps = {
-      ...mockDataProps, initialList: { data: [], currentTodoItem: null }
+      ...mockDataProps, initialList: { data: [], currentNoteItem: null }
     }
-    customRender(<TodoList data={[]} />, emptyDataProps);
+    customRender(<NoteList data={[]} />, emptyDataProps);
 
     const message = screen.queryByText('The list is empty');
     expect(message).toBeInTheDocument();

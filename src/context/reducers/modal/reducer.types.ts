@@ -1,8 +1,8 @@
-import { ModalActionKind, TodoModalType } from '../../../enums';
+import { ModalActionKind, ModalType } from '../../../enums';
 
 export interface ActionModalType {
   type: ModalActionKind.OPEN_MODAL,
-  payload: TodoModalType
+  payload: ModalType
 }
 
 export interface ActionModal {
@@ -11,5 +11,5 @@ export interface ActionModal {
 
 export type ModalState = {
   isModalOpen: boolean,
-  modalType: TodoModalType
+  modalType: ModalType
 }

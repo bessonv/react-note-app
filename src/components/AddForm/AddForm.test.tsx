@@ -9,7 +9,7 @@ const dataItem = mockData[0];
 describe("AddForm component", () => {
   test('should render component correctly', () => {
 
-    customRender(<AddForm todo={dataItem}/>, mockDataProps);
+    customRender(<AddForm note={dataItem}/>, mockDataProps);
 
     const nameInput = screen.getByRole("textbox", { name: 'Name:'} );
     expect(nameInput).toBeInTheDocument();
@@ -18,7 +18,7 @@ describe("AddForm component", () => {
   });
 
   test('should filled input with data', () => {
-    customRender(<AddForm todo={dataItem}/>, mockDataProps);
+    customRender(<AddForm note={dataItem}/>, mockDataProps);
 
     const name = screen.queryByDisplayValue(dataItem.name);
     const description = screen.queryByText(dataItem.description);
@@ -37,9 +37,9 @@ describe("AddForm component", () => {
   });
 
   test('should edit todo on save click', async () => {
-    const editTodo = jest.fn();
-    const mockData = { ...mockDataProps, functions: { editTodo }};
-    customRender(<AddForm todo={dataItem}/>, mockData);
+    const editNote = jest.fn();
+    const mockData = { ...mockDataProps, functions: { editNote }};
+    customRender(<AddForm note={dataItem}/>, mockData);
 
     const submit = screen.getByDisplayValue("save");
     const name = screen.getByDisplayValue(dataItem.name);
@@ -52,7 +52,7 @@ describe("AddForm component", () => {
     await userEvent.type(description, testStr.description);
     await userEvent.click(submit);
 
-    expect(editTodo).toHaveBeenCalledWith({
+    expect(editNote).toHaveBeenCalledWith({
       ...dataItem, 
       name: testStr.name, 
       description: testStr.description 
@@ -60,8 +60,8 @@ describe("AddForm component", () => {
   });
 
   test('should add todo on save click', async() => {
-    const addTodo = jest.fn();
-    const mockData = { ...mockDataProps, functions: { addTodo }};
+    const addNote = jest.fn();
+    const mockData = { ...mockDataProps, functions: { addNote }};
     customRender(<AddForm />, mockData);
 
     const submit = screen.getByDisplayValue("save");
@@ -73,6 +73,6 @@ describe("AddForm component", () => {
     await userEvent.type(description, testStr.description);
     await userEvent.click(submit);
 
-    expect(addTodo).toHaveBeenCalledWith(testStr.name, testStr.description);
+    expect(addNote).toHaveBeenCalledWith(testStr.name, testStr.description);
   })
 });

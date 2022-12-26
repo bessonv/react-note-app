@@ -1,33 +1,33 @@
-import { TodoActionKind } from '../../../enums';
+import { NoteActionKind } from '../../../enums';
 
-interface TodoActionDataArr {
-  type: TodoActionKind.SET_DATA,
+interface NoteActionDataArr {
+  type: NoteActionKind.SET_DATA,
   payload: Data[]
 }
 
-interface TodoActionData {
-  type: TodoActionKind.ADD,
+interface NoteActionData {
+  type: NoteActionKind.ADD,
   payload: Data
 }
 
-interface TodoActionId {
-  type: TodoActionKind.DELETE | TodoActionKind.GET,
+interface NoteActionId {
+  type: NoteActionKind.DELETE | NoteActionKind.GET,
   payload: number
 }
 
-interface TodoActionCurrent {
-  type: TodoActionKind.CLEAR,
+interface NoteActionCurrent {
+  type: NoteActionKind.CLEAR,
   payload: boolean
 }
 
-interface TodoActionEdit {
-  type: TodoActionKind.EDIT,
+interface NoteActionEdit {
+  type: NoteActionKind.EDIT,
   payload: Data
 }
 
-export type TodoAction = TodoActionData | TodoActionId | TodoActionCurrent | TodoActionEdit | TodoActionDataArr;
+export type NoteAction = NoteActionData | NoteActionId | NoteActionCurrent | NoteActionEdit | NoteActionDataArr;
 
-export type TodoState = {
+export type NoteState = {
   data: Data[],
-  currentTodoItem: Data | null,
+  currentNoteItem: Data | null,
 }

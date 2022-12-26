@@ -8,16 +8,16 @@ const Confirm = ({ data }: ConfirmProps): JSX.Element => {
 
   const handleConfirm = (type: boolean) => {
     if (type && data) {
-      state.deleteTodo(data.key);
+      state.deleteNote(data.key);
     }
     state.closeModal();
   }
   return (
-    <div className="todo-confirm">
-      <div className="todo-confirm__description">
+    <div className="note-confirm">
+      <div className="note-confirm__description">
         Are you sure you want to delete item <b>{data?.name}</b>?
       </div>
-      <div className="todo-confirm__buttons">
+      <div className="note-confirm__buttons">
         <input type="button" value="Yes" onClick={() => handleConfirm(true)} className="button-medium"/>
         <input type="button" value="No" onClick={() => handleConfirm(false)} className="button-medium"/>
       </div>

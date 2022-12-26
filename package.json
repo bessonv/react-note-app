@@ -1,8 +1,8 @@
 {
-  "name": "react-todo-app",
+  "name": "react-note-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://bessonv.github.io/react-todo-list",
+  "homepage": "https://bessonv.github.io/react-note-list",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
