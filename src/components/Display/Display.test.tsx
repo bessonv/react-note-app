@@ -26,12 +26,12 @@ describe("Display component", () => {
   });
 
   test('should show edit info on edit button click', async () => {
-    const showEditTodo = jest.fn();
-    const mockProps = { ...mockDataProps, functions: { showEditTodo }};
+    const showEditModal = jest.fn();
+    const mockProps = { ...mockDataProps, functions: { showEditModal }};
     customRender(<Display data={dataItem} />, mockProps);
 
     const editButton = screen.getByRole('button');
     await userEvent.click(editButton);
-    expect(showEditTodo).toHaveBeenCalledWith(dataItem.key);
+    expect(showEditModal).toHaveBeenCalledWith(dataItem.key);
   })
 });

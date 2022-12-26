@@ -1,20 +1,20 @@
 import { createContext, useContext, useEffect, useReducer, useState } from 'react';
 import { ProviderProps, AppContextInterface } from './context.types';
-import { TodoState } from './reducers/list/reducer.types';
+import { NoteState } from './reducers/list/reducer.types';
 import { ModalState } from './reducers/modal/reducer.types';
-import { TodoActionKind, TodoModalType, ModalActionKind } from '../enums';
+import { NoteActionKind, ModalType, ModalActionKind } from '../enums';
 import listReducer from './reducers/list/list.reducer';
 import modalReducer from './reducers/modal/modal.reducer';
 import { API, fetchApiData } from '../api/api';
 
-const listInitialState: TodoState = {
+const listInitialState: NoteState = {
   data: [] as Data[],
-  currentTodoItem: null
+  currentNoteItem: null
 }
 
 const modalInitState: ModalState = {
   isModalOpen: false,
-  modalType: TodoModalType.SHOW
+  modalType: ModalType.SHOW
 }
 
 const AppContext = createContext<AppContextInterface | null>(null);
@@ -25,31 +25,31 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
   const [isLoaded, setLoadState] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const showAllTodos = async () => {
+  const showAllNotes = async () => {
     const resonse = await fetchApiData(API.getList.method, API.getList.url);
     if (resonse?.count) {
-      dispatchList({ type: TodoActionKind.SET_DATA, payload: resonse.items });
+      dispatchList({ type: NoteActionKind.SET_DATA, payload: resonse.items });
       setLoadState(true);
     }
   }
 
-  const showEditTodo = (id: number) => {
-    dispatchList({ type: TodoActionKind.GET, payload: id });
-    dispatchModal({ type: ModalActionKind.OPEN_MODAL, payload: TodoModalType.EDIT });
+  const showEditModal = (id: number) => {
+    dispatchList({ type: NoteActionKind.GET, payload: id });
+    dispatchModal({ type: ModalActionKind.OPEN_MODAL, payload: ModalType.EDIT });
   }
 
-  const showAddTodo = () => {
-    dispatchModal({ type: ModalActionKind.OPEN_MODAL, payload: TodoModalType.ADD });
+  const showAddModal = () => {
+    dispatchModal({ type: ModalActionKind.OPEN_MODAL, payload: ModalType.ADD });
   }
 
-  const showTodo = (id: number) => {
-    dispatchList({ type: TodoActionKind.GET, payload: id });
-    dispatchModal({ type: ModalActionKind.OPEN_MODAL, payload: TodoModalType.SHOW });
+  const showNote = (id: number) => {
+    dispatchList({ type: NoteActionKind.GET, payload: id });
+    dispatchModal({ type: ModalActionKind.OPEN_MODAL, payload: ModalType.SHOW });
   }
 
-  const showDeleteTodo = (id: number) => {
-    dispatchList({ type: TodoActionKind.GET, payload: id });
-    dispatchModal({ type: ModalActionKind.OPEN_MODAL, payload: TodoModalType.CONFIRM });
+  const showDeleteModal = (id: number) => {
+    dispatchList({ type: NoteActionKind.GET, payload: id });
+    dispatchModal({ type: ModalActionKind.OPEN_MODAL, payload: ModalType.CONFIRM });
   }
 
   const closeModal = () => {
@@ -57,10 +57,10 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
   }
 
   const clearCurrent = () => {
-    dispatchList({ type: TodoActionKind.CLEAR, payload: true });
+    dispatchList({ type: NoteActionKind.CLEAR, payload: true });
   }
 
-  const addTodo = async (name: string, description: string) => {
+  const addNote = async (name: string, description: string) => {
     const body = {
       name,
       description,
@@ -75,12 +75,12 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
       const newData: Data = {
         key, name, description, created
       }
-      dispatchList({ type: TodoActionKind.ADD, payload: newData });
+      dispatchList({ type: NoteActionKind.ADD, payload: newData });
       dispatchModal({ type: ModalActionKind.CLOSE_MODAL });
     }
   }
 
-  const editTodo = async (editData: Data) => {
+  const editNote = async (editData: Data) => {
     const body = {
       name: editData.name,
       description: editData.description,
@@ -91,14 +91,14 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
       API.edit.url(editData.key), 
       JSON.stringify(body));
     const { key, name, description, created } = response;
-    dispatchList({ type: TodoActionKind.EDIT, payload: {key, name, description, created} });
+    dispatchList({ type: NoteActionKind.EDIT, payload: {key, name, description, created} });
     dispatchModal({ type: ModalActionKind.CLOSE_MODAL });
   }
 
-  const deleteTodo = async (id: number) => {
+  const deleteNote = async (id: number) => {
     const response = await fetchApiData(API.delete.method, API.delete.url(id));
     if (response.message === 'deleted') {
-      dispatchList({ type: TodoActionKind.DELETE, payload: id });
+      dispatchList({ type: NoteActionKind.DELETE, payload: id });
     } else {
       console.error('item was not deleted', response);
     }
@@ -108,9 +108,9 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
     if (query) {
       const response = await fetchApiData(API.search.method, API.search.url(query));
       if (!response.length) return;
-      dispatchList({ type: TodoActionKind.SET_DATA, payload: response });
+      dispatchList({ type: NoteActionKind.SET_DATA, payload: response });
     } else {
-      showAllTodos();
+      showAllNotes();
     }
   };
 
@@ -121,15 +121,15 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
           ...modalState,
           isLoaded,
           searchQuery,
-          showTodo,
-          showAllTodos, 
+          showNote,
+          showAllNotes, 
           clearCurrent, 
-          showAddTodo, 
-          addTodo, 
-          showEditTodo, 
-          editTodo,
-          showDeleteTodo,
-          deleteTodo, 
+          showAddModal, 
+          addNote, 
+          showEditModal, 
+          editNote,
+          showDeleteModal,
+          deleteNote, 
           closeModal,
           search,
           ...functions

@@ -1,4 +1,4 @@
-export enum TodoActionKind {
+export enum NoteActionKind {
   ADD = 'ADD',
   GET = 'GET',
   EDIT = 'EDIT',
@@ -12,7 +12,7 @@ export enum ModalActionKind {
   OPEN_MODAL = 'OPEN_MODAL',
 }
 
-export enum TodoModalType {
+export enum ModalType {
   SHOW = 'SHOW',
   ADD = 'ADD',
   EDIT = 'EDIT',

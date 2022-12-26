@@ -2,14 +2,14 @@ import { screen } from '@testing-library/react';
 import Modal from './Modal';
 import { mockDataProps } from '../../mocks/mockData';
 import { customRender } from '../../mocks/customRender';
-import { TodoModalType } from '../../enums';
+import { ModalType } from '../../enums';
 import userEvent from '@testing-library/user-event';
 
 describe("Modal component", () => {
   test('should render component correctly', () => {
 
     const mockDataWithModal = {
-      ...mockDataProps, initialModal: { isModalOpen: true, modalType: TodoModalType.SHOW }
+      ...mockDataProps, initialModal: { isModalOpen: true, modalType: ModalType.SHOW }
     }
     const testMessage = <div>This is test message</div>;
     customRender(<Modal>{testMessage}</Modal>, mockDataWithModal);
@@ -22,7 +22,7 @@ describe("Modal component", () => {
     const closeModal = jest.fn();
     const mockDataWithModal = {
       ...mockDataProps, 
-      initialModal: { isModalOpen: true, modalType: TodoModalType.SHOW },
+      initialModal: { isModalOpen: true, modalType: ModalType.SHOW },
       functions: { closeModal }
     };
     customRender(<Modal></Modal>, mockDataWithModal);
@@ -35,7 +35,7 @@ describe("Modal component", () => {
   test('should close modal', async () => {
     const mockDataWithModal = {
       ...mockDataProps, 
-      initialModal: { isModalOpen: true, modalType: TodoModalType.SHOW },
+      initialModal: { isModalOpen: true, modalType: ModalType.SHOW },
     };
     customRender(<Modal></Modal>, mockDataWithModal);
 

@@ -1,32 +1,32 @@
-import { TodoActionKind } from '../../../enums';
-import { TodoAction, TodoState } from './reducer.types';
+import { NoteActionKind } from '../../../enums';
+import { NoteAction, NoteState } from './reducer.types';
 
-function listReducer(state: TodoState, action: TodoAction): TodoState {
+function listReducer(state: NoteState, action: NoteAction): NoteState {
   const { type, payload } = action;
 
-  if (type ===  TodoActionKind.GET) {
-    const currentTodoItem = state.data.find(el => el.key === payload);
-    if (currentTodoItem) // TODO: show error
-      return { ...state, currentTodoItem };
+  if (type ===  NoteActionKind.GET) {
+    const currentNoteItem = state.data.find(el => el.key === payload);
+    if (currentNoteItem) // TODO: show error
+      return { ...state, currentNoteItem: currentNoteItem };
   }
 
-  if (type === TodoActionKind.CLEAR) {
-    return { ...state, currentTodoItem: null };
+  if (type === NoteActionKind.CLEAR) {
+    return { ...state, currentNoteItem: null };
   }
 
-  if (type === TodoActionKind.ADD) {
+  if (type === NoteActionKind.ADD) {
     const {key, name, description, created } = payload;
-    const newTodo: Data = {
+    const newNote: Data = {
       key,
       name,
       description,
       created: new Date(Number(created) || created)
     }
-    const newData = [...state.data, newTodo];
+    const newData = [...state.data, newNote];
     return { ...state, data: newData };
   }
 
-  if (type === TodoActionKind.EDIT) {
+  if (type === NoteActionKind.EDIT) {
     const newData = state.data.map(item => {
       if (item.key === payload.key) {
         const { name, description, created } = payload;
@@ -43,12 +43,12 @@ function listReducer(state: TodoState, action: TodoAction): TodoState {
     return { ...state, data: newData };
   }
 
-  if (type === TodoActionKind.DELETE) {
+  if (type === NoteActionKind.DELETE) {
     let newData = state.data.filter(item => item.key !== payload);
     return { ...state, data: newData };
   }
 
-  if (type === TodoActionKind.SET_DATA) {
+  if (type === NoteActionKind.SET_DATA) {
     const data = payload.map((item: Data) => {
       const createdDate = Number(item.created) || item.created;
       return { ...item, created: new Date(createdDate) }

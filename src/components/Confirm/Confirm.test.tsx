@@ -19,14 +19,14 @@ describe("Confirm component", () => {
   });
 
   test('should delete element on yes', async () => {
-    const deleteTodo = jest.fn();
-    const mockData = { ...mockDataProps, functions: { deleteTodo }};
+    const deleteNote = jest.fn();
+    const mockData = { ...mockDataProps, functions: { deleteNote }};
 
     customRender(<Confirm data={dataItem}/>, mockData);
 
     const okButton = screen.getByRole("button", { name: 'Yes' });
     await userEvent.click(okButton);
-    expect(deleteTodo).toHaveBeenCalledWith(dataItem.key);
+    expect(deleteNote).toHaveBeenCalledWith(dataItem.key);
   });
 
   test('should close modal on no', async () => {

@@ -8,15 +8,15 @@ const Display = ({ data, className, ...props }: DisplayProps): JSX.Element => {
 
   const handleEdit = () => {
     if (data)
-      state.showEditTodo(data.key);
+      state.showEditModal(data.key);
   }
   return (
-    <div className={`${className ?? ''} todo-display`} {...props}>
+    <div className={`${className ?? ''} note-display`} {...props}>
       {data
         ? <>
-            <h2 className="todo-display__name">{data.name}</h2>
-            <div className="todo-display__description">{data.description}</div>
-            <div className="todo-display__date">
+            <h2 className="note-display__name">{data.name}</h2>
+            <div className="note-display__description">{data.description}</div>
+            <div className="note-display__date">
               {`created ${data.created.getDate()}.${data.created.getMonth() + 1}.${data.created.getFullYear()}`}
             </div>
             <input type="button" value="edit" onClick={handleEdit} className="button-medium"/>

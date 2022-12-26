@@ -9,7 +9,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
   return (
     <>
       <header>
-        <h2>To-Do List</h2>
+        <h2>Notes App</h2>
       </header>
       <main>
         {children}

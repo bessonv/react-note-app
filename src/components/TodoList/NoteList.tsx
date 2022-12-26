@@ -1,9 +1,9 @@
-import "./TodoList.style.scss";
-import ListProps from "./TodoList.props";
+import "./NoteList.style.scss";
+import NoteListProps from "./NoteList.props";
 import { useEffect, useState } from "react";
-import TodoItem from "../TodoItem/TodoItem";
+import NoteItem from "../TodoItem/NoteItem";
 
-const TodoList = ({ data, className, ...props }: ListProps): JSX.Element => {
+const NoteList = ({ data, className, ...props }: NoteListProps): JSX.Element => {
   const [list, setList] = useState<Data[] | null>([]);
 
   useEffect(() => {
@@ -17,16 +17,16 @@ const TodoList = ({ data, className, ...props }: ListProps): JSX.Element => {
 
   return (
     <ul
-      className={`${className ?? ''} todo-list`}
+      className={`${className ?? ''} note-list`}
       {...props}
     >
       {
         (list && list.length > 0) ? list.map((element) => {
-          return <TodoItem key={element.key} data={element} />;
+          return <NoteItem key={element.key} data={element} />;
         }) : <div>The list is empty</div>
       }
     </ul>
   )
 }
 
-export default TodoList;
+export default NoteList;

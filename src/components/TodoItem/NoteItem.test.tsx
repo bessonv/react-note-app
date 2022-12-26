@@ -1,14 +1,14 @@
 import { screen } from '@testing-library/react';
-import TodoItem from './TodoItem';
+import NoteItem from './NoteItem';
 import { mockData, mockDataProps } from '../../mocks/mockData';
 import { customRender } from '../../mocks/customRender';
 import userEvent from '@testing-library/user-event';
 
 const dataItem = mockData[0];
 
-describe("TodoItem component", () => {
+describe("NoteItem component", () => {
   test('should render component correctly', () => {
-    customRender(<TodoItem data={dataItem} />, mockDataProps);
+    customRender(<NoteItem data={dataItem} />, mockDataProps);
 
     const header = screen.getByRole("heading", { level: 2 });
     expect(header).toBeInTheDocument();
@@ -28,32 +28,32 @@ describe("TodoItem component", () => {
   });
 
   test('should show item information when click on the element', async () => {
-    const showTodo = jest.fn();
+    const showNote = jest.fn();
     const mockProps = {
       ...mockDataProps,
       functions: {
-        showTodo
+        showNote
       }
     };
-    customRender(<TodoItem data={dataItem} />, mockProps);
+    customRender(<NoteItem data={dataItem} />, mockProps);
 
     const liItem = screen.getByRole('listitem');
     await userEvent.click(liItem);
-    expect(showTodo).toHaveBeenCalled();
+    expect(showNote).toHaveBeenCalled();
   });
 
-  test('should show confirm dialog when delete button clicked', async () => {
-    const showDeleteTodo = jest.fn();
+  test('should show confirm dialog when delete button is clicked', async () => {
+    const showDeleteModal = jest.fn();
     const mockProps = {
       ...mockDataProps,
       functions: {
-        showDeleteTodo
+        showDeleteModal
       }
     };
-    customRender(<TodoItem data={dataItem} />, mockProps);
+    customRender(<NoteItem data={dataItem} />, mockProps);
 
     const deleteButton = screen.getByText('X');
     await userEvent.click(deleteButton);
-    expect(showDeleteTodo).toHaveBeenCalled();
+    expect(showDeleteModal).toHaveBeenCalled();
   });
 });
