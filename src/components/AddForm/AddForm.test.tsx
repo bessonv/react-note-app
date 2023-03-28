@@ -31,7 +31,7 @@ describe("AddForm component", () => {
     const mockData = { ...mockDataProps, functions: { closeModal }};
     customRender(<AddForm />, mockData);
 
-    const cancelButton = screen.getByDisplayValue("cancel");
+    const cancelButton = screen.getByRole("button", { name: 'cancel' });
     await userEvent.click(cancelButton);
     expect(closeModal).toBeCalled();
   });
@@ -41,7 +41,7 @@ describe("AddForm component", () => {
     const mockData = { ...mockDataProps, functions: { editNote }};
     customRender(<AddForm note={dataItem}/>, mockData);
 
-    const submit = screen.getByDisplayValue("save");
+    const submit = screen.getByRole("button", { name: 'save' });
     const name = screen.getByDisplayValue(dataItem.name);
     const description = screen.getByText(dataItem.description);
 
@@ -64,7 +64,7 @@ describe("AddForm component", () => {
     const mockData = { ...mockDataProps, functions: { addNote }};
     customRender(<AddForm />, mockData);
 
-    const submit = screen.getByDisplayValue("save");
+    const submit = screen.getByRole("button", { name: 'save' });
     const name = screen.getByRole("textbox", { name: 'Name:'} );
     const description = screen.getByRole("textbox", { name: 'Description:'} );
 

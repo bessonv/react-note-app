@@ -1,5 +1,6 @@
 import "./Confirm.style.scss";
 import ConfirmProps from "./Confirm.props";
+import Button from "../Button/Button";
 import { useGlobalContext } from "../../context/app.context";
 
 const Confirm = ({ data }: ConfirmProps): JSX.Element => {
@@ -18,8 +19,8 @@ const Confirm = ({ data }: ConfirmProps): JSX.Element => {
         Are you sure you want to delete item <b>{data?.name}</b>?
       </div>
       <div className="note-confirm__buttons">
-        <input type="button" value="Yes" onClick={() => handleConfirm(true)} className="button-medium"/>
-        <input type="button" value="No" onClick={() => handleConfirm(false)} className="button-medium"/>
+        <Button size="medium" onClick={() => handleConfirm(true)}>Yes</Button>
+        <Button size="medium" onClick={() => handleConfirm(false)}>No</Button>
       </div>
     </div>
   );
