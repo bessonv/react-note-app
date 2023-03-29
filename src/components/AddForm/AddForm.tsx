@@ -50,7 +50,6 @@ const AddForm = ({ note, className, ...props }: FormProps): JSX.Element => {
       <div className="note-form__buttons">
         <Button
           type="submit"
-          size="medium"
           appearance="primary"
           className="note-form__button"
         >
@@ -59,7 +58,6 @@ const AddForm = ({ note, className, ...props }: FormProps): JSX.Element => {
         <Button
           type="button"
           onClick={handleCancel}
-          size="medium"
           className="note-form__button"
         >
           cancel

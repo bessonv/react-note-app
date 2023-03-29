@@ -37,7 +37,7 @@ function App() {
         <Search className="control__search"/>
         <Button
           className='control__button'
-          size='medium'
+          shape="default"
           onClick={state.showAddModal}
         >
           Add new ToDo

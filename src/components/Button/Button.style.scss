@@ -1,5 +1,5 @@
 .button {
-  &-medium {
+  &-default {
     padding: 8px;
     border: 1px solid #e0e0e0;
     border-radius: 4px;
@@ -10,6 +10,21 @@
       cursor: pointer;
     }
   }
+
+  &-round {
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    border-radius: 50%;
+    border: none;
+  
+    &:hover {
+      background: #5f636828;
+      cursor: pointer;
+    }
+  }
+
   &-primary {
     color: white;
     background-color: #2eb872;

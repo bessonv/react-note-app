@@ -1,5 +1,6 @@
 import "./NoteItem.style.scss";
 import NoteItemProps from "./NoteItem.props";
+import Button from "../Button/Button";
 import { MouseEvent } from 'react';
 import { useGlobalContext } from "../../context/app.context";
 
@@ -27,7 +28,7 @@ const NoteItem = ({ data, className, ...props }: NoteItemProps): JSX.Element => 
       <article className="note-item__content">
         <header className="note-item__header">
           <h2 className="note-item__name">{name}</h2>
-          <span className="note-item__delete_button button-cross" onClick={handleDelete}>X</span>
+          <Button shape="round" className="note-item__delete_button" onClick={handleDelete}>X</Button>
         </header>
         <p className="note-item__description">
           {description.length > 160 ? description.slice(0, 160) + '...' : description}

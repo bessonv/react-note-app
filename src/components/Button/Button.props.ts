@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 
 export interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-  size: 'medium' | 'small',
+  shape?: 'default' | 'round',
   appearance?: 'primary' | 'plain'
 }

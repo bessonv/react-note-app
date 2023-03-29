@@ -20,7 +20,7 @@ const Display = ({ data, className, ...props }: DisplayProps): JSX.Element => {
             <div className="note-display__date">
               {`created ${data.created.getDate()}.${data.created.getMonth() + 1}.${data.created.getFullYear()}`}
             </div>
-            <Button size="medium" onClick={handleEdit}>edit</Button>
+            <Button shape="default" onClick={handleEdit}>edit</Button>
           </>
         : <div>Empty object</div>
       }

@@ -1,10 +1,10 @@
 import "./Button.style.scss"
 import { ButtonProps } from "./Button.props";
 
-const Button = ({ size, appearance='plain', children, className, ...props }: ButtonProps): JSX.Element => {
+const Button = ({ shape='default', appearance='plain', children, className, ...props }: ButtonProps): JSX.Element => {
   return (
     <button
-      className={`${className ?? ''} button-${size} button-${appearance}`}
+      className={`${className ?? ''} button-${shape} button-${appearance}`}
       {...props}
     >
       {children}

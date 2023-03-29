@@ -49,20 +49,7 @@ main {
       background-image: url(./loading.svg);
     }
   }
-
-  .button-cross {
-    text-align: center;
-    width: 20px;
-    height: 20px;
-    padding: 5px;
-    border-radius: 50%;
-
-    &:hover {
-      background: #5f636828;
-      cursor: pointer;
-    }
-  }
-
+  
   @mixin input-style {
     border: 1px solid #e0e0e0;
     padding: 10px;

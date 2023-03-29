@@ -19,8 +19,8 @@ const Confirm = ({ data }: ConfirmProps): JSX.Element => {
         Are you sure you want to delete item <b>{data?.name}</b>?
       </div>
       <div className="note-confirm__buttons">
-        <Button size="medium" onClick={() => handleConfirm(true)}>Yes</Button>
-        <Button size="medium" onClick={() => handleConfirm(false)}>No</Button>
+        <Button shape="default" onClick={() => handleConfirm(true)}>Yes</Button>
+        <Button shape="default" onClick={() => handleConfirm(false)}>No</Button>
       </div>
     </div>
   );
