@@ -51,6 +51,7 @@ const AddForm = ({ note, className, ...props }: FormProps): JSX.Element => {
         <Button
           type="submit"
           size="medium"
+          appearance="primary"
           className="note-form__button"
         >
           save
