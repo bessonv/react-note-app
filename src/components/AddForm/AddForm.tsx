@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import { useGlobalContext } from "../../context/app.context";
 import { useState } from "react";
 import Input from "../Input/Input";
+import Textarea from "../Textarea/Textarea";
 
 const AddForm = ({ note, className, ...props }: FormProps): JSX.Element => {
   const state = useGlobalContext();
@@ -39,13 +40,12 @@ const AddForm = ({ note, className, ...props }: FormProps): JSX.Element => {
         />
       </label>
       <label className="note-form__description">
-        <span>Description:</span>
-        <textarea 
-          rows={6} 
-          name="noteDescription" 
-          className="note-textarea" 
-          value={description} 
-          onChange={(e) => changeDescr(e.target.value)}/>
+        <Textarea
+          className="note-textarea"
+          textareaLabel="Description:"
+          textareaValue={description}
+          onChange={(e) => changeDescr(e.target.value)}
+        />
       </label>
       <div className="note-form__buttons">
         <Button
