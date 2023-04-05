@@ -3,6 +3,7 @@ import FormProps from "./AddForm.props";
 import Button from "../Button/Button";
 import { useGlobalContext } from "../../context/app.context";
 import { useState } from "react";
+import Input from "../Input/Input";
 
 const AddForm = ({ note, className, ...props }: FormProps): JSX.Element => {
   const state = useGlobalContext();
@@ -30,13 +31,12 @@ const AddForm = ({ note, className, ...props }: FormProps): JSX.Element => {
       {...props}
     >
       <label className="note-form__name">
-        <span>Name:</span>
-        <input 
-          type="text" 
-          name="noteName" 
-          className="note-input" 
-          value={name} 
-          onChange={(e) => changeName(e.target.value)}/>
+        <Input
+          className="note-input"
+          inputLabel="Name:"
+          inputValue={name}
+          onChange={(e) => changeName(e.target.value)}
+        />
       </label>
       <label className="note-form__description">
         <span>Description:</span>
