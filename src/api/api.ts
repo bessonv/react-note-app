@@ -1,26 +1,26 @@
 import { RestMethod } from "../enums";
-const API_URL = 'https://nbsxk3.deta.dev';
+const API_URL = 'https://notelistserver-1-e1862925.deta.app';
 
 export const API = {
   getList: {
     method: RestMethod.GET,
-    url: `${API_URL}/todos`
+    url: `${API_URL}/notes`
   },
   add: {
     method: RestMethod.POST,
-    url: `${API_URL}/todos`
+    url: `${API_URL}/notes`
   },
   edit: {
     method: RestMethod.PUT,
-    url: (id: number) => `${API_URL}/todos/${id}`
+    url: (id: number) => `${API_URL}/notes/${id}`
   },
   delete: {
     method: RestMethod.DELETE,
-    url: (id: number) => `${API_URL}/todos/${id}`
+    url: (id: number) => `${API_URL}/notes/${id}`
   },
   search: {
     method: RestMethod.GET,
-    url: (query: string) => `${API_URL}/search-by-str/${query}`
+    url: (query: string) => `${API_URL}/notes/search/${query}`
   }
 };
 
@@ -28,7 +28,7 @@ export const fetchApiData = (method: string, url: string, body?: string) => {
   const options = {
     method: method,
     headers: {
-    'X-API-Key': process.env.REACT_APP_API_KEY || '',
+    'X-Space-App-Key': process.env.REACT_APP_API_KEY || '',
     'Content-Type': 'application/json'
     },
     body: body
