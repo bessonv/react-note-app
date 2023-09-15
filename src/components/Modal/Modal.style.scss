@@ -19,18 +19,8 @@
     position: relative;
 
     &_button {
-      text-align: center;
-      width: 20px;
-      height: 20px;
-      padding: 5px;
-      border-radius: 50%;
       position: absolute;
       right: 0;
-
-      &:hover {
-        background: #5f636828;
-        cursor: pointer;
-      }
     }
   }
 }

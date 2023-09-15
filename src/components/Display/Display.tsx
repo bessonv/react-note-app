@@ -1,5 +1,6 @@
 import "./Display.style.scss";
 import DisplayProps from "./Display.props";
+import Button from "../Button/Button";
 import { useGlobalContext } from "../../context/app.context";
 
 const Display = ({ data, className, ...props }: DisplayProps): JSX.Element => {
@@ -19,7 +20,7 @@ const Display = ({ data, className, ...props }: DisplayProps): JSX.Element => {
             <div className="note-display__date">
               {`created ${data.created.getDate()}.${data.created.getMonth() + 1}.${data.created.getFullYear()}`}
             </div>
-            <input type="button" value="edit" onClick={handleEdit} className="button-medium"/>
+            <Button shape="default" onClick={handleEdit}>edit</Button>
           </>
         : <div>Empty object</div>
       }

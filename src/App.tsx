@@ -5,6 +5,7 @@ import AddForm from './components/AddForm/AddForm';
 import Display from './components/Display/Display';
 import Search from './components/Search/Search';
 import Confirm from './components/Confirm/Confirm';
+import Button from './components/Button/Button';
 
 import { ModalType } from './enums';
 import { useGlobalContext  } from './context/app.context';
@@ -34,12 +35,13 @@ function App() {
     <>
       <div className="control">
         <Search className="control__search"/>
-        <button 
-          onClick={state.showAddModal} 
-          className="control__button button-medium"
+        <Button
+          className='control__button'
+          shape="default"
+          onClick={state.showAddModal}
         >
           Add new ToDo
-        </button>
+        </Button>
       </div>
       {
         state.isLoaded ? 

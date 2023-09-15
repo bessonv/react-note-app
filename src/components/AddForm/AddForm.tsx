@@ -1,5 +1,6 @@
 import "./AddForm.style.scss";
 import FormProps from "./AddForm.props";
+import Button from "../Button/Button";
 import { useGlobalContext } from "../../context/app.context";
 import { useState } from "react";
 
@@ -47,8 +48,20 @@ const AddForm = ({ note, className, ...props }: FormProps): JSX.Element => {
           onChange={(e) => changeDescr(e.target.value)}/>
       </label>
       <div className="note-form__buttons">
-        <input type="submit" value="save" className="note-form__button button-medium"/>
-        <input type="button" value="cancel" onClick={handleCancel} className="note-form__button button-medium"/>
+        <Button
+          type="submit"
+          appearance="primary"
+          className="note-form__button"
+        >
+          save
+        </Button>
+        <Button
+          type="button"
+          onClick={handleCancel}
+          className="note-form__button"
+        >
+          cancel
+        </Button>
       </div>
     </form>
   )
