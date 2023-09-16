@@ -1,5 +1,5 @@
 import { RestMethod } from "../enums";
-const API_URL = 'https://notelistserver-1-e1862925.deta.app';
+const API_URL = 'https://notesproject-1-h1299757.deta.app/api';
 
 export const API = {
   getList: {
@@ -28,7 +28,6 @@ export const fetchApiData = (method: string, url: string, body?: string) => {
   const options = {
     method: method,
     headers: {
-    'X-Space-App-Key': process.env.REACT_APP_API_KEY || '',
     'Content-Type': 'application/json'
     },
     body: body
