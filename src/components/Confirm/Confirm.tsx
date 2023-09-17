@@ -5,13 +5,16 @@ import { useGlobalContext } from "../../context/app.context";
 
 const Confirm = ({ data }: ConfirmProps): JSX.Element => {
 
-  const state = useGlobalContext();
+  const {
+    deleteNote,
+    closeModal,
+  } = useGlobalContext();
 
   const handleConfirm = (type: boolean) => {
     if (type && data) {
-      state.deleteNote(data.key);
+      deleteNote(data.key);
     }
-    state.closeModal();
+    closeModal();
   }
   return (
     <div className="note-confirm">

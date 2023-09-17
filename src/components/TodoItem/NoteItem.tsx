@@ -5,7 +5,10 @@ import { MouseEvent } from 'react';
 import { useGlobalContext } from "../../context/app.context";
 
 const NoteItem = ({ data, className, ...props }: NoteItemProps): JSX.Element => {
-  const state = useGlobalContext();
+  const {
+    showNote,
+    showDeleteModal
+  } = useGlobalContext();
   const {
     key,
     name,
@@ -13,11 +16,11 @@ const NoteItem = ({ data, className, ...props }: NoteItemProps): JSX.Element => 
     created
   } = data;
   const handleShow = (e: MouseEvent<HTMLLIElement>) => {
-    state.showNote(key);
+    showNote(key);
   }
   const handleDelete = (e: MouseEvent<HTMLSpanElement>) => {
     e.stopPropagation();
-    state.showDeleteModal(key);
+    showDeleteModal(key);
   }
   return (
     <li

@@ -5,7 +5,11 @@ import { useGlobalContext } from "../../context/app.context";
 import { useState } from "react";
 
 const AddForm = ({ note, className, ...props }: FormProps): JSX.Element => {
-  const state = useGlobalContext();
+  const {
+    editNote,
+    addNote,
+    closeModal,
+  } = useGlobalContext();
   const [name, changeName] = useState(note?.name || '');
   const [description, changeDescr] = useState(note?.description || '');
 
@@ -13,14 +17,14 @@ const AddForm = ({ note, className, ...props }: FormProps): JSX.Element => {
     e.preventDefault();
 
     if (note) {
-      state.editNote({ ...note, name, description });
+      editNote({ ...note, name, description });
     } else {
-      state.addNote(name, description);
+      addNote(name, description);
     }
   }
 
   const handleCancel = () => {
-    state.closeModal();
+    closeModal();
   }
 
   return (

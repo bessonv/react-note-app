@@ -17,13 +17,19 @@ type ModalHash = {
 }
 
 function App() {
-  const state = useGlobalContext();
+  const {
+    currentNoteItem,
+    showAddModal,
+    isLoaded,
+    data,
+    modalType,
+  } = useGlobalContext();
 
   let mHash: ModalHash = {
-    [ModalType.SHOW]: <Display data={state.currentNoteItem || undefined} />,
+    [ModalType.SHOW]: <Display data={currentNoteItem || undefined} />,
     [ModalType.ADD]: <AddForm />,
-    [ModalType.EDIT]: <AddForm note={state.currentNoteItem || undefined} />,
-    [ModalType.CONFIRM]: <Confirm data={state.currentNoteItem || undefined} />
+    [ModalType.EDIT]: <AddForm note={currentNoteItem || undefined} />,
+    [ModalType.CONFIRM]: <Confirm data={currentNoteItem || undefined} />
   };
   
   return (
@@ -33,19 +39,17 @@ function App() {
         <Button
           className='control__button'
           shape="default"
-          onClick={state.showAddModal}
+          onClick={showAddModal}
         >
           Add new ToDo
         </Button>
       </div>
       {
-        state.isLoaded ? 
-          <NoteList data={state.data} /> : 
+        isLoaded ? 
+          <NoteList data={data} /> : 
           <div className='loading_message'>Loading</div>
       }
-      <Modal>
-        { mHash[state.modalType] }
-      </Modal>
+      <Modal>{mHash[modalType]}</Modal>
     </>
   );
 }

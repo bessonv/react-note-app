@@ -5,11 +5,11 @@ import { useGlobalContext } from "../../context/app.context";
 
 const Display = ({ data, className, ...props }: DisplayProps): JSX.Element => {
 
-  const state = useGlobalContext();
+  const { showEditModal } = useGlobalContext();
 
   const handleEdit = () => {
     if (data)
-      state.showEditModal(data.key);
+      showEditModal(data.key);
   }
   return (
     <div className={`${className ?? ''} note-display`} {...props}>
