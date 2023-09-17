@@ -1,8 +1,10 @@
 import { RestMethod } from "../enums";
-const API_URL = 'https://notesproject-1-h1299757.deta.app/api';
+const API_URL = (process.env.NODE_ENV === 'development')
+  ? 'http://localhost:4200/api'
+  : 'https://notesproject-1-h1299757.deta.app/api';
 
-export const API = {
-  getList: {
+const API = {
+  get: {
     method: RestMethod.GET,
     url: `${API_URL}/notes`
   },
@@ -12,11 +14,11 @@ export const API = {
   },
   edit: {
     method: RestMethod.PUT,
-    url: (id: number) => `${API_URL}/notes/${id}`
+    url: (key: string) => `${API_URL}/notes/${key}`
   },
   delete: {
     method: RestMethod.DELETE,
-    url: (id: number) => `${API_URL}/notes/${id}`
+    url: (key: string) => `${API_URL}/notes/${key}`
   },
   search: {
     method: RestMethod.GET,
@@ -24,7 +26,7 @@ export const API = {
   }
 };
 
-export const fetchApiData = (method: string, url: string, body?: string) => {
+const fetchApiData = (method: string, url: string, body?: string) => {
   const options = {
     method: method,
     headers: {
@@ -42,3 +44,23 @@ export const fetchApiData = (method: string, url: string, body?: string) => {
     }
   }).catch(err => console.error(err));
 };
+
+export const apiGetNotes = () => {
+  return fetchApiData(API.get.method, API.get.url);
+}
+
+export const apiAddNote = (body: NewData) => {
+  return fetchApiData(API.add.method, API.add.url, JSON.stringify(body));
+}
+
+export const apiEditNote = (body: NewData, key: string) => {
+  return fetchApiData(API.edit.method, API.edit.url(key), JSON.stringify(body));
+}
+
+export const apiDeleteNote = (key: string) => {
+  return fetchApiData(API.delete.method, API.delete.url(key));
+}
+
+export const apiSearchNotes = (query: string) => {
+  return fetchApiData(API.search.method, API.search.url(query));
+}

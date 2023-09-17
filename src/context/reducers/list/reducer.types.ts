@@ -12,7 +12,7 @@ interface NoteActionData {
 
 interface NoteActionId {
   type: NoteActionKind.DELETE | NoteActionKind.GET,
-  payload: number
+  payload: string
 }
 
 interface NoteActionCurrent {

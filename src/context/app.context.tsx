@@ -5,7 +5,7 @@ import { ModalState } from './reducers/modal/reducer.types';
 import { NoteActionKind, ModalType, ModalActionKind } from '../enums';
 import listReducer from './reducers/list/list.reducer';
 import modalReducer from './reducers/modal/modal.reducer';
-import { API, fetchApiData } from '../api/api';
+import { apiGetNotes, apiEditNote, apiAddNote, apiDeleteNote, apiSearchNotes } from '../api/api';
 
 const listInitialState: NoteState = {
   data: [] as Data[],
@@ -25,15 +25,19 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
   const [isLoaded, setLoadState] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
+  useEffect(() => {
+    showAllNotes();
+  }, []);
+
   const showAllNotes = async () => {
-    const resonse = await fetchApiData(API.getList.method, API.getList.url);
-    if (resonse?.count) {
-      dispatchList({ type: NoteActionKind.SET_DATA, payload: resonse.items });
+    const response = await apiGetNotes();
+    if (response?.count) {
+      dispatchList({ type: NoteActionKind.SET_DATA, payload: response.items });
       setLoadState(true);
     }
   }
 
-  const showEditModal = (id: number) => {
+  const showEditModal = (id: string) => {
     dispatchList({ type: NoteActionKind.GET, payload: id });
     dispatchModal({ type: ModalActionKind.OPEN_MODAL, payload: ModalType.EDIT });
   }
@@ -42,12 +46,12 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
     dispatchModal({ type: ModalActionKind.OPEN_MODAL, payload: ModalType.ADD });
   }
 
-  const showNote = (id: number) => {
+  const showNote = (id: string) => {
     dispatchList({ type: NoteActionKind.GET, payload: id });
     dispatchModal({ type: ModalActionKind.OPEN_MODAL, payload: ModalType.SHOW });
   }
 
-  const showDeleteModal = (id: number) => {
+  const showDeleteModal = (id: string) => {
     dispatchList({ type: NoteActionKind.GET, payload: id });
     dispatchModal({ type: ModalActionKind.OPEN_MODAL, payload: ModalType.CONFIRM });
   }
@@ -61,15 +65,12 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
   }
 
   const addNote = async (name: string, description: string) => {
-    const body = {
+    const body: NewData = {
       name,
       description,
       created: new Date().getTime()
     }
-    const response = await fetchApiData(
-      API.add.method,
-      API.add.url, 
-      JSON.stringify(body));
+    const response = await apiAddNote(body);
     if (response) {
       const { key, name, description, created } = response;
       const newData: Data = {
@@ -84,19 +85,16 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
     const body = {
       name: editData.name,
       description: editData.description,
-      created: editData.created.toLocaleDateString()
+      created: editData.created.getTime()
     }
-    const response = await fetchApiData(
-      API.edit.method, 
-      API.edit.url(editData.key), 
-      JSON.stringify(body));
+    const response = await apiEditNote(body, editData.key);
     const { key, name, description, created } = response;
     dispatchList({ type: NoteActionKind.EDIT, payload: {key, name, description, created} });
     dispatchModal({ type: ModalActionKind.CLOSE_MODAL });
   }
 
-  const deleteNote = async (id: number) => {
-    const response = await fetchApiData(API.delete.method, API.delete.url(id));
+  const deleteNote = async (id: string) => {
+    const response = await apiDeleteNote(id);
     if (response.message === 'deleted') {
       dispatchList({ type: NoteActionKind.DELETE, payload: id });
     } else {
@@ -105,13 +103,13 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
   }
 
   const search = async (query: string) => {
-    if (query) {
-      const response = await fetchApiData(API.search.method, API.search.url(query));
-      if (!response.length) return;
-      dispatchList({ type: NoteActionKind.SET_DATA, payload: response });
-    } else {
+    if (!query) {
       showAllNotes();
+      return;
     }
+    const response = await apiSearchNotes(query);
+    if (!response.length) return;
+    dispatchList({ type: NoteActionKind.SET_DATA, payload: response });
   };
 
   return (

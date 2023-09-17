@@ -10,7 +10,6 @@ import Button from './components/Button/Button';
 import { ModalType } from './enums';
 import { useGlobalContext  } from './context/app.context';
 import { withLayout } from './layout/layout';
-import { useEffect } from 'react';
 
 
 type ModalHash = {
@@ -19,10 +18,6 @@ type ModalHash = {
 
 function App() {
   const state = useGlobalContext();
-
-  useEffect(() => {
-    state.showAllNotes();
-  }, []);
 
   let mHash: ModalHash = {
     [ModalType.SHOW]: <Display data={state.currentNoteItem || undefined} />,
