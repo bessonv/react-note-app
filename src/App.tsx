@@ -10,6 +10,7 @@ import Button from './components/Button/Button';
 import { ModalType } from './enums';
 import { useGlobalContext  } from './context/app.context';
 import { withLayout } from './layout/layout';
+import Preloader from './components/Preloader/Preloader';
 
 
 type ModalHash = {
@@ -44,11 +45,9 @@ function App() {
           Add new ToDo
         </Button>
       </div>
-      {
-        isLoaded ? 
-          <NoteList data={data} /> : 
-          <div className='loading_message'>Loading</div>
-      }
+      <Preloader show={isLoaded}>
+        <NoteList data={data} />
+      </Preloader>
       <Modal>{mHash[modalType]}</Modal>
     </>
   );
