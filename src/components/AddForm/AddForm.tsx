@@ -6,6 +6,7 @@ import { useState } from "react";
 
 const AddForm = ({ note, className, ...props }: FormProps): JSX.Element => {
   const {
+    isFetching,
     editNote,
     addNote,
     closeModal,
@@ -40,6 +41,7 @@ const AddForm = ({ note, className, ...props }: FormProps): JSX.Element => {
           name="noteName" 
           className="note-input" 
           value={name} 
+          disabled={isFetching}
           onChange={(e) => changeName(e.target.value)}/>
       </label>
       <label className="note-form__description">
@@ -49,12 +51,14 @@ const AddForm = ({ note, className, ...props }: FormProps): JSX.Element => {
           name="noteDescription" 
           className="note-textarea" 
           value={description} 
+          disabled={isFetching}
           onChange={(e) => changeDescr(e.target.value)}/>
       </label>
       <div className="note-form__buttons">
         <Button
           type="submit"
           appearance="primary"
+          isLoading={isFetching}
           className="note-form__button"
         >
           save

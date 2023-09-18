@@ -24,6 +24,7 @@ export type ProviderProps = {
 export interface AppContextInterface {
   data: Data[],
   isLoaded: boolean,
+  isFetching: boolean,
   currentNoteItem: Data | null,
   searchQuery: string,
   isModalOpen: boolean,

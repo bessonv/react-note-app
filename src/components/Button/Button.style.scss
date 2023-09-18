@@ -34,4 +34,21 @@
     color: #333;
     background-color: white;
   }
+
+  &-loading {
+    color: #333;
+    background-color: #3c404314;
+    
+    &:hover {
+      cursor: default;
+    }
+  }
+
+  &__loading-circle {
+    height: 1rem;
+    width: 2.5rem;
+    background-image: url(../../loading.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 }

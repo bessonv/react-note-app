@@ -23,6 +23,7 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
   const [listState, dispatchList] = useReducer(listReducer, initialList ?? listInitialState);
   const [modalState, dispatchModal] = useReducer(modalReducer, initialModal ?? modalInitState);
   const [isLoaded, setLoadState] = useState<boolean>(false);
+  const [isFetching, setFetching] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   useEffect(() => {
@@ -70,7 +71,9 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
       description,
       created: new Date().getTime()
     }
+    setFetching(true);
     const response = await apiAddNote(body);
+    setFetching(false);
     if (response) {
       const { key, name, description, created } = response;
       const newData: Data = {
@@ -87,7 +90,9 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
       description: editData.description,
       created: editData.created.getTime()
     }
+    setFetching(true);
     const response = await apiEditNote(body, editData.key);
+    setFetching(false);
     const { key, name, description, created } = response;
     dispatchList({ type: NoteActionKind.EDIT, payload: {key, name, description, created} });
     dispatchModal({ type: ModalActionKind.CLOSE_MODAL });
@@ -118,6 +123,7 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
           ...listState,
           ...modalState,
           isLoaded,
+          isFetching,
           searchQuery,
           showNote,
           showAllNotes, 
