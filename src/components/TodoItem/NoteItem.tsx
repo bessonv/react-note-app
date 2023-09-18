@@ -22,6 +22,9 @@ const NoteItem = ({ data, className, ...props }: NoteItemProps): JSX.Element => 
     e.stopPropagation();
     showDeleteModal(key);
   }
+  const noteDescription = (description.length > 160)
+    ? description.slice(0, 160) + '...'
+    : description;
   return (
     <li
       className={`${className ?? ''} note-item`}
@@ -30,11 +33,13 @@ const NoteItem = ({ data, className, ...props }: NoteItemProps): JSX.Element => 
     >
       <article className="note-item__content">
         <header className="note-item__header">
-          <h2 className="note-item__name">{name}</h2>
+          <h2 className="note-item__name">
+            {!name ? <i className="empty">Empty</i> : name}
+          </h2>
           <Button shape="round" className="note-item__delete_button" onClick={handleDelete}>X</Button>
         </header>
         <p className="note-item__description">
-          {description.length > 160 ? description.slice(0, 160) + '...' : description}
+          {!noteDescription ? <i className="empty">Empty</i> : noteDescription}
         </p>
         <span className="note-item__date">
           {`${created.getDate()}.${created.getMonth() + 1}.${created.getFullYear()}`}

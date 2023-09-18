@@ -11,12 +11,17 @@ const Display = ({ data, className, ...props }: DisplayProps): JSX.Element => {
     if (data)
       showEditModal(data.key);
   }
+  
   return (
     <div className={`${className ?? ''} note-display`} {...props}>
       {data
         ? <>
-            <h2 className="note-display__name">{data.name}</h2>
-            <div className="note-display__description">{data.description}</div>
+            <h2 className="note-display__name">
+              {!data.name ? <i className="empty">Empty</i> : data.name}
+            </h2>
+            <div className="note-display__description">
+              {!data.description ? <i className="empty">Empty</i> : data.description}
+            </div>
             <div className="note-display__date">
               {`created ${data.created.getDate()}.${data.created.getMonth() + 1}.${data.created.getFullYear()}`}
             </div>
