@@ -1,4 +1,4 @@
 
 export default interface ConfirmProps {
-  data?: Data
+  data?: Data | null
 }

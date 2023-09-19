@@ -27,10 +27,10 @@ function App() {
   } = useGlobalContext();
 
   let mHash: ModalHash = {
-    [ModalType.SHOW]: <Display data={currentNoteItem || undefined} />,
+    [ModalType.SHOW]: <Display data={currentNoteItem} />,
     [ModalType.ADD]: <AddForm />,
-    [ModalType.EDIT]: <AddForm note={currentNoteItem || undefined} />,
-    [ModalType.CONFIRM]: <Confirm data={currentNoteItem || undefined} />
+    [ModalType.EDIT]: <AddForm note={currentNoteItem} />,
+    [ModalType.CONFIRM]: <Confirm data={currentNoteItem} />
   };
   
   return (
@@ -42,7 +42,7 @@ function App() {
           shape="default"
           onClick={showAddModal}
         >
-          Add new ToDo
+          Add new note
         </Button>
       </div>
       <Preloader show={isLoaded}>
