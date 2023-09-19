@@ -15,6 +15,7 @@ describe("Search component", () => {
 
   test('should send search query on input typing', async () => {
     const search = jest.fn();
+    jest.useFakeTimers();
     const mockProps = { ...mockDataProps, functions: { search } };    
 
     customRender(<Search />, mockProps);
@@ -22,6 +23,9 @@ describe("Search component", () => {
     const query = 'test query';
     const input = screen.getByRole('textbox');
     await userEvent.type(input, query);
+    expect(search).not.toBeCalled();
+    jest.advanceTimersByTime(1000);
     expect(search).toHaveBeenCalledWith(query);
+    expect(search).toHaveBeenCalledTimes(1);
   })
 });

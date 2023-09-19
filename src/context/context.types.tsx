@@ -26,7 +26,6 @@ export interface AppContextInterface {
   isLoaded: boolean,
   isFetching: boolean,
   currentNoteItem: Data | null,
-  searchQuery: string,
   isModalOpen: boolean,
   modalType: ModalType,
   showNote(id: string): void,

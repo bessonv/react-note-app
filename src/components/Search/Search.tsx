@@ -1,14 +1,21 @@
-import { useCallback, useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import SearchProps from "./Search.props";
 import { useGlobalContext } from "../../context/app.context";
 
 const Search = ({ className, ...props }: SearchProps): JSX.Element => {
   const { search } = useGlobalContext();
   const [query, changeQuery] = useState('');
-  const handleQuery = useCallback((e: FormEvent<HTMLInputElement>) => {
+  const handleQuery = (e: FormEvent<HTMLInputElement>) => {
     changeQuery(e.currentTarget.value);
-    search(e.currentTarget.value);
-  }, [changeQuery, search]);
+  }
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      search(query);
+    }, 1000);
+    return () => clearTimeout(timeout);
+  }, [query]);
+
   return (
     <input 
       className={`${className ?? ''} search todo-input`}

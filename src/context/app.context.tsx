@@ -22,9 +22,8 @@ const AppContext = createContext<AppContextInterface | null>(null);
 const AppProvider = ({ children, initialList, initialModal, functions }: ProviderProps) => {
   const [listState, dispatchList] = useReducer(listReducer, initialList ?? listInitialState);
   const [modalState, dispatchModal] = useReducer(modalReducer, initialModal ?? modalInitState);
-  const [isLoaded, setLoadState] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setFetching] = useState<boolean>(false);
-  const [searchQuery, setSearchQuery] = useState<string>('');
 
   useEffect(() => {
     showAllNotes();
@@ -34,7 +33,7 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
     const response = await apiGetNotes();
     if (response?.count) {
       dispatchList({ type: NoteActionKind.SET_DATA, payload: response.items });
-      setLoadState(true);
+      setIsLoaded(true);
     }
   }
 
@@ -112,7 +111,9 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
       showAllNotes();
       return;
     }
+    setIsLoaded(false);
     const response = await apiSearchNotes(query);
+    setIsLoaded(true);
     if (!response.length) return;
     dispatchList({ type: NoteActionKind.SET_DATA, payload: response });
   };
@@ -124,7 +125,6 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
           ...modalState,
           isLoaded,
           isFetching,
-          searchQuery,
           showNote,
           showAllNotes, 
           clearCurrent, 
