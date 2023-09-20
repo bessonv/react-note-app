@@ -1,20 +1,10 @@
+.title {
+  margin-top: 0;
+}
+
 .note-form {
-  &__name {
-    margin-top: 20px;
-  }
-  
-  label {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    span {
-      margin-bottom: 5px;
-    }
-  }
-
   &__buttons {
+    margin-top: 1.5rem;
     display: flex;
     justify-content: center;
   }

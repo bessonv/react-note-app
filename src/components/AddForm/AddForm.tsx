@@ -3,6 +3,8 @@ import FormProps from "./AddForm.props";
 import Button from "../Button/Button";
 import { useGlobalContext } from "../../context/app.context";
 import { useState } from "react";
+import Input from "../Input/Input";
+import Textarea from "../Textarea/Textarea";
 
 const AddForm = ({ note, className, ...props }: FormProps): JSX.Element => {
   const {
@@ -29,49 +31,53 @@ const AddForm = ({ note, className, ...props }: FormProps): JSX.Element => {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit} 
-      className={`${className ?? ''} note-form`}
-      {...props}
-    >
-      <label className="note-form__name">
-        <span>Name:</span>
-        <input 
-          type="text" 
-          name="noteName" 
-          className="note-input" 
-          value={name} 
+    <>
+      <h2 className="title">
+        {note
+          ? "Edit note"
+          : "Create note"
+        }
+      </h2>
+      <form
+        onSubmit={handleSubmit} 
+        className={`${className ?? ''} note-form`}
+        {...props}
+      >
+        <Input
+          label="Name"
+          name="noteName"
+          value={name}
           disabled={isFetching}
-          onChange={(e) => changeName(e.target.value)}/>
-      </label>
-      <label className="note-form__description">
-        <span>Description:</span>
-        <textarea 
-          rows={6} 
-          name="noteDescription" 
-          className="note-textarea" 
-          value={description} 
+          placeholder="Note name"
+          onChange={(e) => changeName(e.target.value)}
+        />
+        <Textarea
+          label="Description"
+          name="noteDescription"
+          value={description}
           disabled={isFetching}
-          onChange={(e) => changeDescr(e.target.value)}/>
-      </label>
-      <div className="note-form__buttons">
-        <Button
-          type="submit"
-          appearance="primary"
-          isLoading={isFetching}
-          className="note-form__button"
-        >
-          save
-        </Button>
-        <Button
-          type="button"
-          onClick={handleCancel}
-          className="note-form__button"
-        >
-          cancel
-        </Button>
-      </div>
-    </form>
+          placeholder="Note description"
+          onChange={(e) => changeDescr(e.target.value)}
+        />
+        <div className="note-form__buttons">
+          <Button
+            type="submit"
+            appearance="primary"
+            isLoading={isFetching}
+            className="note-form__button"
+          >
+            save
+          </Button>
+          <Button
+            type="button"
+            onClick={handleCancel}
+            className="note-form__button"
+          >
+            cancel
+          </Button>
+        </div>
+      </form>
+    </>
   )
 }
 

@@ -32,25 +32,4 @@ main {
       width: 30%;
     }
   }
-  
-  @mixin input-style {
-    border: 1px solid #e0e0e0;
-    padding: 10px;
-    border-radius: 6px;
-    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
-
-    &:focus {
-      outline: none;
-    }
-  }
-
-  .todo-input {
-    @include input-style();
-  }
-
-  .todo-textarea {
-    @include input-style();
-    resize: vertical;
-  }
-
 }

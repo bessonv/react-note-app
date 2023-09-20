@@ -1,6 +1,8 @@
+import "./Search.style.scss";
 import { useState, FormEvent, useEffect } from "react";
 import SearchProps from "./Search.props";
 import { useGlobalContext } from "../../context/app.context";
+import Input from "../Input/Input";
 
 const Search = ({ className, ...props }: SearchProps): JSX.Element => {
   const { search } = useGlobalContext();
@@ -17,13 +19,14 @@ const Search = ({ className, ...props }: SearchProps): JSX.Element => {
   }, [query]);
 
   return (
-    <input 
-      className={`${className ?? ''} search todo-input`}
+    <Input
+      className={`${className ?? ''} search search-input`}
       type="text" 
       placeholder="search" 
       onChange={handleQuery}
       value={query}
-      {...props} />
+      {...props}
+    />
   )
 }
 
