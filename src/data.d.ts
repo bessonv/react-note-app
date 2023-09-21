@@ -5,8 +5,4 @@ type Data = {
   created: Date
 }
 
-type NewData = {
-  name: string,
-  description: string,
-  created: number | Date
-}
+type NewData = Omit<Data, "key">;

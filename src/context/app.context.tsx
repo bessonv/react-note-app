@@ -68,7 +68,7 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
     const body: NewData = {
       name,
       description,
-      created: new Date().getTime()
+      created: new Date()//.getTime()
     }
     setFetching(true);
     const response = await apiAddNote(body);
@@ -84,10 +84,10 @@ const AppProvider = ({ children, initialList, initialModal, functions }: Provide
   }
 
   const editNote = async (editData: Data) => {
-    const body = {
+    const body: NewData = {
       name: editData.name,
       description: editData.description,
-      created: editData.created.getTime()
+      created: editData.created//.getTime()
     }
     setFetching(true);
     const response = await apiEditNote(body, editData.key);
