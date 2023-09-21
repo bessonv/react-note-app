@@ -1,5 +1,5 @@
 import './App.scss';
-import NoteList from './components/TodoList/NoteList';
+import NoteList from './components/NoteList/NoteList';
 import Modal from './components/Modal/Modal';
 import AddForm from './components/AddForm/AddForm';
 import Display from './components/Display/Display';

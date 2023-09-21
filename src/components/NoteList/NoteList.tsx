@@ -1,7 +1,7 @@
 import "./NoteList.style.scss";
 import NoteListProps from "./NoteList.props";
 import { useEffect, useState } from "react";
-import NoteItem from "../TodoItem/NoteItem";
+import NoteItem from "../NoteItem/NoteItem";
 
 const NoteList = ({ data, className, ...props }: NoteListProps): JSX.Element => {
   const [list, setList] = useState<Data[] | null>([]);
