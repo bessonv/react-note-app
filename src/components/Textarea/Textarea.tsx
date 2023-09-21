@@ -1,17 +1,20 @@
 import "./Textarea.style.scss";
 import { TextareaProps } from "./Textarea.props";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Textarea = ({label, className, ...props}: TextareaProps) => {
   const { value } = props;
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  let textareaHeight = undefined;
-  const textareaEl = textareaRef.current;
-  if (value && textareaEl) {
-    textareaHeight = (textareaEl.scrollHeight > textareaEl.clientHeight) 
+  const [textareaHeight, setHeight] = useState<number | undefined>(undefined);
+
+  useEffect(() => {
+    const textareaEl = textareaRef.current;
+    if (!textareaEl) return;
+    const newHeight = (textareaEl.scrollHeight > textareaEl.clientHeight) 
       ? textareaEl.scrollHeight + 20
       : textareaEl.offsetHeight;
-  }
+    setHeight(newHeight);
+  }, [value, textareaRef])
 
   return (
     <>
