@@ -1,5 +1,15 @@
 .title {
   margin-top: 0;
+  display: inline;
+  vertical-align: middle;
+
+  &-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 5px;
+    display: inline;
+    vertical-align: middle;
+  }
 }
 
 .note-form {

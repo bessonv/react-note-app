@@ -10,6 +10,17 @@
     text-align: right;
   }
 
+  &__button {
+    &-icon {
+      display: inline;
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-right: 3px;
+      margin-bottom: 2px;
+      vertical-align: middle;
+    }
+  }
+
   .empty {
     color: #8e8e8e;
   }

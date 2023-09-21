@@ -2,6 +2,7 @@ import "./Display.style.scss";
 import DisplayProps from "./Display.props";
 import Button from "../Button/Button";
 import { useGlobalContext } from "../../context/app.context";
+import { ReactComponent as EditIcon } from '../../assets/pencil-filled.svg';
 
 const Display = ({ data, className, ...props }: DisplayProps): JSX.Element => {
 
@@ -25,7 +26,13 @@ const Display = ({ data, className, ...props }: DisplayProps): JSX.Element => {
             <div className="note-display__date">
               {`created ${data.created.getDate()}.${data.created.getMonth() + 1}.${data.created.getFullYear()}`}
             </div>
-            <Button shape="default" onClick={handleEdit}>edit</Button>
+            <Button
+              shape="default"
+              onClick={handleEdit}
+            >
+              <EditIcon className="note-display__button-icon"/>
+              Edit
+            </Button>
           </>
         : <div>Empty object</div>
       }

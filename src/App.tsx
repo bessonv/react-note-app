@@ -11,6 +11,7 @@ import { ModalType } from './enums';
 import { useGlobalContext  } from './context/app.context';
 import { withLayout } from './layout/layout';
 import Preloader from './components/Preloader/Preloader';
+import { ReactComponent as NewIcon } from './assets/pencil-empty.svg';
 
 
 type ModalHash = {
@@ -42,7 +43,8 @@ function App() {
           shape="default"
           onClick={showAddModal}
         >
-          Add new note
+          <NewIcon className='control__button-icon'/>
+          Add note
         </Button>
       </div>
       <Preloader show={isLoaded}>

@@ -5,6 +5,8 @@ import { useGlobalContext } from "../../context/app.context";
 import { useState } from "react";
 import Input from "../Input/Input";
 import Textarea from "../Textarea/Textarea";
+import { ReactComponent as EditIcon } from '../../assets/pencil-filled.svg';
+import { ReactComponent as NewIcon } from '../../assets/pencil-empty.svg';
 
 const AddForm = ({ note, className, ...props }: FormProps): JSX.Element => {
   const {
@@ -32,6 +34,10 @@ const AddForm = ({ note, className, ...props }: FormProps): JSX.Element => {
 
   return (
     <>
+      {note
+        ? <EditIcon className="title-icon" />
+        : <NewIcon className="title-icon" />
+      }
       <h2 className="title">
         {note
           ? "Edit note"
