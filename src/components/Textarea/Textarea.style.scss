@@ -15,6 +15,7 @@
     padding: 0.75rem;
     resize: vertical;
     line-height: normal;
+    font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     background-color: #F9FAFB;
     border-radius: 0.25rem;
@@ -27,5 +28,4 @@
 textarea:focus {
   outline: none;
   border-color: #202124;
-  // background-color: white;
 }
