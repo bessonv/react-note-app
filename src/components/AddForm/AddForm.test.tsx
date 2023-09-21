@@ -11,9 +11,9 @@ describe("AddForm component", () => {
 
     customRender(<AddForm note={dataItem}/>, mockDataProps);
 
-    const nameInput = screen.getByRole("textbox", { name: 'Name:'} );
+    const nameInput = screen.getByPlaceholderText("Note name");
     expect(nameInput).toBeInTheDocument();
-    const descriptionInput = screen.getByRole("textbox", { name: 'Description:'} );
+    const descriptionInput = screen.getByPlaceholderText("Note description")
     expect(descriptionInput).toBeInTheDocument();
   });
 
@@ -65,8 +65,8 @@ describe("AddForm component", () => {
     customRender(<AddForm />, mockData);
 
     const submit = screen.getByRole("button", { name: 'save' });
-    const name = screen.getByRole("textbox", { name: 'Name:'} );
-    const description = screen.getByRole("textbox", { name: 'Description:'} );
+    const name = screen.getByPlaceholderText("Note name");
+    const description = screen.getByPlaceholderText("Note description")
 
     const testStr = { name: 'test', description: 'test description' };
     await userEvent.type(name, testStr.name);
